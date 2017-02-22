@@ -1,0 +1,30 @@
+﻿生成启动时间为 2017/2/20 23:35:02。
+     1>项目“d:\用户目录\documents\visual studio 2013\Projects\NexGen\math\math.vcxproj”在节点 4 上(Build 个目标)。
+     1>ClCompile:
+         E:\Program\VS2013\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt matrix_f.cpp matrix_x.cpp quaternion_f.cpp quaternion_x.cpp vector.cpp
+         matrix_f.cpp
+         正在生成代码...
+         正在编译...
+         vector.cpp
+     1>d:\用户目录\documents\visual studio 2013\projects\nexgen\math\vector.cpp(2179): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+     1>d:\用户目录\documents\visual studio 2013\projects\nexgen\math\vector.cpp(2180): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+     1>d:\用户目录\documents\visual studio 2013\projects\nexgen\math\vector.cpp(2181): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+     1>d:\用户目录\documents\visual studio 2013\projects\nexgen\math\vector.cpp(2205): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+     1>d:\用户目录\documents\visual studio 2013\projects\nexgen\math\vector.cpp(2206): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+     1>d:\用户目录\documents\visual studio 2013\projects\nexgen\math\vector.cpp(2207): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+         quaternion_x.cpp
+         quaternion_f.cpp
+         matrix_x.cpp
+         正在生成代码...
+       Lib:
+         E:\Program\VS2013\VC\bin\Lib.exe /OUT:"d:\用户目录\documents\visual studio 2013\Projects\NexGen\Debug\math.lib" /NOLOGO Debug\matrix_f.obj
+         Debug\matrix_x.obj
+         Debug\quaternion_f.obj
+         Debug\quaternion_x.obj
+         Debug\vector.obj
+         math.vcxproj -> d:\用户目录\documents\visual studio 2013\Projects\NexGen\Debug\math.lib
+     1>已完成生成项目“d:\用户目录\documents\visual studio 2013\Projects\NexGen\math\math.vcxproj”(Build 个目标)的操作。
+
+生成成功。
+
+已用时间 00:00:01.66
