@@ -1,0 +1,16 @@
+﻿生成启动时间为 2017/3/3 23:56:48。
+     1>项目“D:\用户目录\Documents\Visual Studio 2013\Projects\NexGen\world\world.vcxproj”在节点 3 上(Rebuild 个目标)。
+     1>ClCompile:
+         E:\Program\VS2013\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _LIB /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt world.cpp world_main.cpp
+         world_main.cpp
+         world.cpp
+         正在生成代码...
+       Lib:
+         E:\Program\VS2013\VC\bin\Lib.exe /OUT:"d:\用户目录\documents\visual studio 2013\Projects\NexGen\Debug\world.lib" /NOLOGO Debug\world.obj
+         Debug\world_main.obj
+         world.vcxproj -> d:\用户目录\documents\visual studio 2013\Projects\NexGen\Debug\world.lib
+     1>已完成生成项目“D:\用户目录\Documents\Visual Studio 2013\Projects\NexGen\world\world.vcxproj”(Rebuild 个目标)的操作。
+
+生成成功。
+
+已用时间 00:00:01.82
