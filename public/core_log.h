@@ -18,12 +18,12 @@ extern ICore* g_pCore;
 // 记录日志
 inline void CORE_TRACE(const char* info)
 {
-	//g_pCore->TraceLog(info);
+	g_pCore->TraceLog(info);
 }
 
 inline void CORE_TRACE(const wchar_t* info)
 {
-	//g_pCore->TraceLogW(info);
+	g_pCore->TraceLogW(info);
 }
 
 // 多参数LOG输出：

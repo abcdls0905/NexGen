@@ -11,7 +11,7 @@
 #define _VISUAL_I_RESOURCE_H
 
 #include "../public/macros.h"
-#include "../visual/define.h"
+#include "../visual/fm_define.h"
 
 // 显示资源基类
 

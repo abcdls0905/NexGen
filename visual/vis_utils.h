@@ -1,3 +1,11 @@
+//--------------------------------------------------------------------
+// 文件名:		vis_utils.h
+// 内  容:		
+// 说  明:		
+// 创建日期:	2007年5月28日
+// 创建人:		陆利民
+// 版权所有:	苏州蜗牛电子有限公司
+//--------------------------------------------------------------------
 
 #ifndef _VISUAL_VIS_UTILS_H
 #define _VISUAL_VIS_UTILS_H
@@ -10,8 +18,8 @@
 #include "../public/inlines.h"
 #include "../public/core_log.h"
 
-#include "define.h"
-#include "header.h"
+#include "fm_define.h"
+#include "fm_header.h"
 
 #define COLOR_ARGB(a, r, g, b) ((unsigned int)((((a) & 0xFF)<<24) \
 	| (((r) & 0xFF) << 16) | (((g) & 0xFF) << 8) | ((b) & 0xFF)))
