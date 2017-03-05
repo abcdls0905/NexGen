@@ -1,0 +1,735 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="visual">
+      <UniqueIdentifier>{f55cf79f-3b2c-4616-a7fe-68e22f02da79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ktx20">
+      <UniqueIdentifier>{85f60acf-9a0e-4991-b7de-90545bb66f6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dds">
+      <UniqueIdentifier>{a299b8f8-8cc5-4f24-8fbd-33d647e8e82c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="pvr">
+      <UniqueIdentifier>{130fcd95-b272-48de-a6bc-80d709f807aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="shader_optimizer">
+      <UniqueIdentifier>{a8d069a3-7a86-43a7-a108-216fafcd4ffc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="shader_optimizer\src">
+      <UniqueIdentifier>{14a41cda-71ed-46d4-92e0-77a6ed1a7cbb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="shader_optimizer\src\glsl">
+      <UniqueIdentifier>{3f03545f-2900-4d5d-8ac5-ab205b7a4e35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="shader_optimizer\src\glsl\glcpp">
+      <UniqueIdentifier>{828d0c14-632d-4dd5-9a39-854878ae5e7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="shader_optimizer\src\mesa">
+      <UniqueIdentifier>{208a7f5e-1ea0-4f66-a47e-186d23ccfa9f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="shader_optimizer\src\mesa\main">
+      <UniqueIdentifier>{66306eba-172f-4fae-bf44-276ad957afa2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="shader_optimizer\src\mesa\program">
+      <UniqueIdentifier>{68175506-374d-4de0-8c91-51c4d5f03db9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cache">
+      <UniqueIdentifier>{9e867edd-3f2a-459f-b239-1075ff399b1a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\visual\fm_define.h">
+      <Filter>visual</Filter>
+    </ClInclude>
+    <ClInclude Include="..\visual\fm_header.h">
+      <Filter>visual</Filter>
+    </ClInclude>
+    <ClInclude Include="..\visual\i_context.h">
+      <Filter>visual</Filter>
+    </ClInclude>
+    <ClInclude Include="..\visual\i_font.h">
+      <Filter>visual</Filter>
+    </ClInclude>
+    <ClInclude Include="..\visual\i_gui_hook.h">
+      <Filter>visual</Filter>
+    </ClInclude>
+    <ClInclude Include="..\visual\i_image_access.h">
+      <Filter>visual</Filter>
+    </ClInclude>
+    <ClInclude Include="..\visual\i_render.h">
+      <Filter>visual</Filter>
+    </ClInclude>
+    <ClInclude Include="..\visual\i_res_base.h">
+      <Filter>visual</Filter>
+    </ClInclude>
+    <ClInclude Include="..\visual\i_res_loader.h">
+      <Filter>visual</Filter>
+    </ClInclude>
+    <ClInclude Include="..\visual\i_resource.h">
+      <Filter>visual</Filter>
+    </ClInclude>
+    <ClInclude Include="..\visual\i_scene_view.h">
+      <Filter>visual</Filter>
+    </ClInclude>
+    <ClInclude Include="..\visual\i_texture.h">
+      <Filter>visual</Filter>
+    </ClInclude>
+    <ClInclude Include="..\visual\i_vis_base.h">
+      <Filter>visual</Filter>
+    </ClInclude>
+    <ClInclude Include="..\visual\shader_list.h">
+      <Filter>visual</Filter>
+    </ClInclude>
+    <ClInclude Include="..\visual\vis_utils.h">
+      <Filter>visual</Filter>
+    </ClInclude>
+    <ClInclude Include="ktx20\gl_funcptrs.h">
+      <Filter>ktx20</Filter>
+    </ClInclude>
+    <ClInclude Include="ktx20\gles1_funcptrs.h">
+      <Filter>ktx20</Filter>
+    </ClInclude>
+    <ClInclude Include="ktx20\gles2_funcptrs.h">
+      <Filter>ktx20</Filter>
+    </ClInclude>
+    <ClInclude Include="ktx20\gles3_funcptrs.h">
+      <Filter>ktx20</Filter>
+    </ClInclude>
+    <ClInclude Include="ktx20\ktx.h">
+      <Filter>ktx20</Filter>
+    </ClInclude>
+    <ClInclude Include="ktx20\ktxint.h">
+      <Filter>ktx20</Filter>
+    </ClInclude>
+    <ClInclude Include="ktx20\uthash.h">
+      <Filter>ktx20</Filter>
+    </ClInclude>
+    <ClInclude Include="nv_color.h">
+      <Filter>dds</Filter>
+    </ClInclude>
+    <ClInclude Include="nv_debug.h">
+      <Filter>dds</Filter>
+    </ClInclude>
+    <ClInclude Include="nv_global.h">
+      <Filter>dds</Filter>
+    </ClInclude>
+    <ClInclude Include="nv_hhdds.h">
+      <Filter>dds</Filter>
+    </ClInclude>
+    <ClInclude Include="nv_hhdds_internal.h">
+      <Filter>dds</Filter>
+    </ClInclude>
+    <ClInclude Include="nv_types.h">
+      <Filter>dds</Filter>
+    </ClInclude>
+    <ClInclude Include="libpvr.h">
+      <Filter>pvr</Filter>
+    </ClInclude>
+    <ClInclude Include="shader_optimizer\src\glsl\ast.h">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClInclude>
+    <ClInclude Include="shader_optimizer\src\glsl\builtin_type_macros.h">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClInclude>
+    <ClInclude Include="shader_optimizer\src\glsl\glsl_optimizer.h">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClInclude>
+    <ClInclude Include="shader_optimizer\src\glsl\glsl_parser.h">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClInclude>
+    <ClInclude Include="shader_optimizer\src\glsl\glsl_parser_extras.h">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClInclude>
+    <ClInclude Include="shader_optimizer\src\glsl\glsl_symbol_table.h">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClInclude>
+    <ClInclude Include="shader_optimizer\src\glsl\glsl_types.h">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClInclude>
+    <ClInclude Include="shader_optimizer\src\glsl\ir.h">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClInclude>
+    <ClInclude Include="shader_optimizer\src\glsl\ir_basic_block.h">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClInclude>
+    <ClInclude Include="shader_optimizer\src\glsl\ir_builder.h">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClInclude>
+    <ClInclude Include="shader_optimizer\src\glsl\ir_expression_flattening.h">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClInclude>
+    <ClInclude Include="shader_optimizer\src\glsl\ir_function_inlining.h">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClInclude>
+    <ClInclude Include="shader_optimizer\src\glsl\ir_hierarchical_visitor.h">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClInclude>
+    <ClInclude Include="shader_optimizer\src\glsl\ir_optimization.h">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClInclude>
+    <ClInclude Include="shader_optimizer\src\glsl\ir_print_glsl_visitor.h">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClInclude>
+    <ClInclude Include="shader_optimizer\src\glsl\ir_print_visitor.h">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClInclude>
+    <ClInclude Include="shader_optimizer\src\glsl\ir_rvalue_visitor.h">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClInclude>
+    <ClInclude Include="shader_optimizer\src\glsl\ir_stats.h">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClInclude>
+    <ClInclude Include="shader_optimizer\src\glsl\ir_uniform.h">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClInclude>
+    <ClInclude Include="shader_optimizer\src\glsl\ir_unused_structs.h">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClInclude>
+    <ClInclude Include="shader_optimizer\src\glsl\ir_variable_refcount.h">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClInclude>
+    <ClInclude Include="shader_optimizer\src\glsl\ir_visitor.h">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClInclude>
+    <ClInclude Include="shader_optimizer\src\glsl\link_uniform_block_active_visitor.h">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClInclude>
+    <ClInclude Include="shader_optimizer\src\glsl\link_varyings.h">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClInclude>
+    <ClInclude Include="shader_optimizer\src\glsl\linker.h">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClInclude>
+    <ClInclude Include="shader_optimizer\src\glsl\list.h">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClInclude>
+    <ClInclude Include="shader_optimizer\src\glsl\loop_analysis.h">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClInclude>
+    <ClInclude Include="shader_optimizer\src\glsl\program.h">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClInclude>
+    <ClInclude Include="shader_optimizer\src\glsl\ralloc.h">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClInclude>
+    <ClInclude Include="shader_optimizer\src\glsl\s_expression.h">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClInclude>
+    <ClInclude Include="shader_optimizer\src\glsl\standalone_scaffolding.h">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClInclude>
+    <ClInclude Include="shader_optimizer\src\glsl\strtod.h">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClInclude>
+    <ClInclude Include="shader_optimizer\src\glsl\glcpp\glcpp-parse.h">
+      <Filter>shader_optimizer\src\glsl\glcpp</Filter>
+    </ClInclude>
+    <ClInclude Include="shader_optimizer\src\glsl\glcpp\glcpp.h">
+      <Filter>shader_optimizer\src\glsl\glcpp</Filter>
+    </ClInclude>
+    <ClInclude Include="shader_optimizer\src\mesa\main\compiler.h">
+      <Filter>shader_optimizer\src\mesa\main</Filter>
+    </ClInclude>
+    <ClInclude Include="shader_optimizer\src\mesa\main\config.h">
+      <Filter>shader_optimizer\src\mesa\main</Filter>
+    </ClInclude>
+    <ClInclude Include="shader_optimizer\src\mesa\main\context.h">
+      <Filter>shader_optimizer\src\mesa\main</Filter>
+    </ClInclude>
+    <ClInclude Include="shader_optimizer\src\mesa\main\core.h">
+      <Filter>shader_optimizer\src\mesa\main</Filter>
+    </ClInclude>
+    <ClInclude Include="shader_optimizer\src\mesa\main\dd.h">
+      <Filter>shader_optimizer\src\mesa\main</Filter>
+    </ClInclude>
+    <ClInclude Include="shader_optimizer\src\mesa\main\glheader.h">
+      <Filter>shader_optimizer\src\mesa\main</Filter>
+    </ClInclude>
+    <ClInclude Include="shader_optimizer\src\mesa\main\glminimal.h">
+      <Filter>shader_optimizer\src\mesa\main</Filter>
+    </ClInclude>
+    <ClInclude Include="shader_optimizer\src\mesa\main\hash_table.h">
+      <Filter>shader_optimizer\src\mesa\main</Filter>
+    </ClInclude>
+    <ClInclude Include="shader_optimizer\src\mesa\main\imports.h">
+      <Filter>shader_optimizer\src\mesa\main</Filter>
+    </ClInclude>
+    <ClInclude Include="shader_optimizer\src\mesa\main\macros.h">
+      <Filter>shader_optimizer\src\mesa\main</Filter>
+    </ClInclude>
+    <ClInclude Include="shader_optimizer\src\mesa\main\mtypes.h">
+      <Filter>shader_optimizer\src\mesa\main</Filter>
+    </ClInclude>
+    <ClInclude Include="shader_optimizer\src\mesa\main\simple_list.h">
+      <Filter>shader_optimizer\src\mesa\main</Filter>
+    </ClInclude>
+    <ClInclude Include="shader_optimizer\src\mesa\program\hash_table.h">
+      <Filter>shader_optimizer\src\mesa\program</Filter>
+    </ClInclude>
+    <ClInclude Include="shader_optimizer\src\mesa\program\prog_instruction.h">
+      <Filter>shader_optimizer\src\mesa\program</Filter>
+    </ClInclude>
+    <ClInclude Include="shader_optimizer\src\mesa\program\prog_parameter.h">
+      <Filter>shader_optimizer\src\mesa\program</Filter>
+    </ClInclude>
+    <ClInclude Include="shader_optimizer\src\mesa\program\prog_statevars.h">
+      <Filter>shader_optimizer\src\mesa\program</Filter>
+    </ClInclude>
+    <ClInclude Include="shader_optimizer\src\mesa\program\symbol_table.h">
+      <Filter>shader_optimizer\src\mesa\program</Filter>
+    </ClInclude>
+    <ClInclude Include="cache_file.h">
+      <Filter>cache</Filter>
+    </ClInclude>
+    <ClInclude Include="cache_ini.h">
+      <Filter>cache</Filter>
+    </ClInclude>
+    <ClInclude Include="cache_ini_loader.h">
+      <Filter>cache</Filter>
+    </ClInclude>
+    <ClInclude Include="cache_loader.h">
+      <Filter>cache</Filter>
+    </ClInclude>
+    <ClInclude Include="color_rt.h" />
+    <ClInclude Include="color_tex.h" />
+    <ClInclude Include="common_device.h" />
+    <ClInclude Include="context.h" />
+    <ClInclude Include="cube_tex_loader.h" />
+    <ClInclude Include="ddsfile.h" />
+    <ClInclude Include="depth_rt.h" />
+    <ClInclude Include="depth_tex.h" />
+    <ClInclude Include="depthstencil_rt.h" />
+    <ClInclude Include="depthstencil_tex.h" />
+    <ClInclude Include="device_caps.h" />
+    <ClInclude Include="dynamic_ib.h" />
+    <ClInclude Include="dynamic_tex.h" />
+    <ClInclude Include="dynamic_vb.h" />
+    <ClInclude Include="font.h" />
+    <ClInclude Include="font_manager.h" />
+    <ClInclude Include="font_outline.h" />
+    <ClInclude Include="frame_rt.h" />
+    <ClInclude Include="helper.h" />
+    <ClInclude Include="image_access.h" />
+    <ClInclude Include="mempool2.h" />
+    <ClInclude Include="paint_batch.h" />
+    <ClInclude Include="painter.h" />
+    <ClInclude Include="pixel_shader.h" />
+    <ClInclude Include="render.h" />
+    <ClInclude Include="render_cmd_op.h" />
+    <ClInclude Include="render_draw_op.h" />
+    <ClInclude Include="render_header.h" />
+    <ClInclude Include="render_state_op.h" />
+    <ClInclude Include="render_tool.h" />
+    <ClInclude Include="render_utils.h" />
+    <ClInclude Include="res_thread.h" />
+    <ClInclude Include="scene_view.h" />
+    <ClInclude Include="shader_param_op.h" />
+    <ClInclude Include="shader_program.h" />
+    <ClInclude Include="static_cube.h" />
+    <ClInclude Include="static_ib.h" />
+    <ClInclude Include="static_tex.h" />
+    <ClInclude Include="static_vb.h" />
+    <ClInclude Include="stencil_tex.h" />
+    <ClInclude Include="tex_factory.h" />
+    <ClInclude Include="tex_font.h" />
+    <ClInclude Include="tex_loader.h" />
+    <ClInclude Include="tex_sampler.h" />
+    <ClInclude Include="tex_tools.h" />
+    <ClInclude Include="texture.h" />
+    <ClInclude Include="vertex_shader.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ktx20\checkheader.c">
+      <Filter>ktx20</Filter>
+    </ClCompile>
+    <ClCompile Include="ktx20\errstr.c">
+      <Filter>ktx20</Filter>
+    </ClCompile>
+    <ClCompile Include="ktx20\etcdec.cxx">
+      <Filter>ktx20</Filter>
+    </ClCompile>
+    <ClCompile Include="ktx20\etcunpack.cxx">
+      <Filter>ktx20</Filter>
+    </ClCompile>
+    <ClCompile Include="ktx20\hashtable.c">
+      <Filter>ktx20</Filter>
+    </ClCompile>
+    <ClCompile Include="ktx20\loader.c">
+      <Filter>ktx20</Filter>
+    </ClCompile>
+    <ClCompile Include="ktx20\swap.c">
+      <Filter>ktx20</Filter>
+    </ClCompile>
+    <ClCompile Include="ktx20\writer.c">
+      <Filter>ktx20</Filter>
+    </ClCompile>
+    <ClCompile Include="nv_hhdds.cpp">
+      <Filter>dds</Filter>
+    </ClCompile>
+    <ClCompile Include="nv_images.cpp">
+      <Filter>dds</Filter>
+    </ClCompile>
+    <ClCompile Include="libpvr.cpp">
+      <Filter>pvr</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\ast_array_index.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\ast_expr.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\ast_function.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\ast_to_hir.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\ast_type.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\builtin_functions.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\builtin_types.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\builtin_variables.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\glsl_lexer.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\glsl_optimizer.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\glsl_parser.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\glsl_parser_extras.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\glsl_symbol_table.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\glsl_types.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\hir_field_selection.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\ir.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\ir_basic_block.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\ir_builder.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\ir_clone.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\ir_constant_expression.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\ir_equals.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\ir_expression_flattening.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\ir_function.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\ir_function_can_inline.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\ir_function_detect_recursion.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\ir_hierarchical_visitor.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\ir_hv_accept.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\ir_import_prototypes.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\ir_print_glsl_visitor.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\ir_print_visitor.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\ir_rvalue_visitor.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\ir_stats.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\ir_unused_structs.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\ir_validate.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\ir_variable_refcount.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\link_atomics.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\link_functions.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\link_interface_blocks.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\link_uniform_block_active_visitor.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\link_uniform_blocks.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\link_uniform_initializers.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\link_uniforms.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\link_varyings.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\linker.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\loop_analysis.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\loop_controls.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\loop_unroll.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\lower_clip_distance.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\lower_discard.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\lower_discard_flow.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\lower_if_to_cond_assign.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\lower_instructions.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\lower_jumps.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\lower_mat_op_to_vec.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\lower_named_interface_blocks.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\lower_noise.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\lower_output_reads.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\lower_packed_varyings.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\lower_packing_builtins.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\lower_ubo_reference.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\lower_variable_index_to_cond_assign.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\lower_vec_index_to_cond_assign.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\lower_vec_index_to_swizzle.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\lower_vector.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\lower_vector_insert.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\opt_algebraic.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\opt_array_splitting.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\opt_constant_folding.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\opt_constant_propagation.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\opt_constant_variable.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\opt_copy_propagation.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\opt_copy_propagation_elements.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\opt_cse.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\opt_dead_builtin_varyings.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\opt_dead_code.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\opt_dead_code_local.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\opt_dead_functions.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\opt_flatten_nested_if_blocks.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\opt_flip_matrices.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\opt_function_inlining.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\opt_if_simplification.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\opt_noop_swizzle.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\opt_redundant_jumps.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\opt_structure_splitting.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\opt_swizzle_swizzle.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\opt_tree_grafting.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\opt_vectorize.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\ralloc.c">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\s_expression.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\standalone_scaffolding.cpp">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\strtod.c">
+      <Filter>shader_optimizer\src\glsl</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\glcpp\glcpp-lex.c">
+      <Filter>shader_optimizer\src\glsl\glcpp</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\glcpp\glcpp-parse.c">
+      <Filter>shader_optimizer\src\glsl\glcpp</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\glsl\glcpp\pp.c">
+      <Filter>shader_optimizer\src\glsl\glcpp</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\mesa\main\hash_table.c">
+      <Filter>shader_optimizer\src\mesa\main</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\mesa\main\imports.c">
+      <Filter>shader_optimizer\src\mesa\main</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\mesa\program\prog_hash_table.c">
+      <Filter>shader_optimizer\src\mesa\program</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_optimizer\src\mesa\program\symbol_table.c">
+      <Filter>shader_optimizer\src\mesa\program</Filter>
+    </ClCompile>
+    <ClCompile Include="cache_file.cpp">
+      <Filter>cache</Filter>
+    </ClCompile>
+    <ClCompile Include="cache_ini.cpp">
+      <Filter>cache</Filter>
+    </ClCompile>
+    <ClCompile Include="cache_ini_loader.cpp">
+      <Filter>cache</Filter>
+    </ClCompile>
+    <ClCompile Include="cache_loader.cpp">
+      <Filter>cache</Filter>
+    </ClCompile>
+    <ClCompile Include="color_rt.cpp" />
+    <ClCompile Include="color_tex.cpp" />
+    <ClCompile Include="common_device.cpp" />
+    <ClCompile Include="context.cpp" />
+    <ClCompile Include="cube_tex_loader.cpp" />
+    <ClCompile Include="depth_rt.cpp" />
+    <ClCompile Include="depth_tex.cpp" />
+    <ClCompile Include="depthstencil_rt.cpp" />
+    <ClCompile Include="depthstencil_tex.cpp" />
+    <ClCompile Include="device_caps.cpp" />
+    <ClCompile Include="dynamic_ib.cpp" />
+    <ClCompile Include="dynamic_tex.cpp" />
+    <ClCompile Include="dynamic_vb.cpp" />
+    <ClCompile Include="font.cpp" />
+    <ClCompile Include="font_manager.cpp" />
+    <ClCompile Include="font_outline.cpp" />
+    <ClCompile Include="frame_rt.cpp" />
+    <ClCompile Include="helper.cpp" />
+    <ClCompile Include="image_access.cpp" />
+    <ClCompile Include="lib_main.cpp" />
+    <ClCompile Include="mempool2.cpp" />
+    <ClCompile Include="nv_syscaps.cpp" />
+    <ClCompile Include="paint_batch.cpp" />
+    <ClCompile Include="painter.cpp" />
+    <ClCompile Include="pixel_shader.cpp" />
+    <ClCompile Include="render.cpp" />
+    <ClCompile Include="render_draw_op.cpp" />
+    <ClCompile Include="render_resource.cpp" />
+    <ClCompile Include="render_shader.cpp" />
+    <ClCompile Include="render_state_op.cpp" />
+    <ClCompile Include="render_texture.cpp" />
+    <ClCompile Include="render_tool.cpp" />
+    <ClCompile Include="res_thread.cpp" />
+    <ClCompile Include="scene_view.cpp" />
+    <ClCompile Include="scene_view_draw.cpp" />
+    <ClCompile Include="shader_param_op.cpp" />
+    <ClCompile Include="shader_program.cpp" />
+    <ClCompile Include="static_cube.cpp" />
+    <ClCompile Include="static_ib.cpp" />
+    <ClCompile Include="static_tex.cpp" />
+    <ClCompile Include="static_vb.cpp" />
+    <ClCompile Include="stencil_tex.cpp" />
+    <ClCompile Include="tex_factory.cpp" />
+    <ClCompile Include="tex_font.cpp" />
+    <ClCompile Include="tex_loader.cpp" />
+    <ClCompile Include="tex_sampler.cpp" />
+    <ClCompile Include="tex_tools.cpp" />
+    <ClCompile Include="texture.cpp" />
+    <ClCompile Include="vertex_shader.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="nv_syscaps.h" />
+  </ItemGroup>
+</Project>

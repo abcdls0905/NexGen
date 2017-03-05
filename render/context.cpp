@@ -1,6 +1,15 @@
+//--------------------------------------------------------------------
+// 文件名:		context.cpp
+// 内  容:		
+// 说  明:		
+// 创建日期:	2007年3月26日
+// 创建人:		陆利民
+// 版权所有:	苏州蜗牛电子有限公司
+//--------------------------------------------------------------------
 
 #include "context.h"
 #include "render.h"
+#include "helper.h"
 #include "../public/module.h"
 #include "../public/core_mem.h"
 #include "../public/core_log.h"
@@ -287,7 +296,11 @@ int CContext::GetViewHeight()
 
 void CContext::MakeClipPlane()
 {
-	//Helper_MakeViewPlanes(m_Camera.mtxView, m_Camera.mtxDxProj, m_ClipPlane, 4);
+//	Helper_MakeViewPlanes(m_Camera.mtxView, m_Camera.mtxProj, 
+//		m_ClipPlane, 4);
+	Helper_MakeViewPlanes(m_Camera.mtxView, m_Camera.mtxDxProj, 
+		m_ClipPlane, 4);
+
 }
 
 // render target

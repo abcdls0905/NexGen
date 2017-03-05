@@ -1,3 +1,11 @@
+//--------------------------------------------------------------------
+// 文件名:		render_header.h
+// 内  容:		将所有GL API相关的头文件放入该目录
+// 说  明:		
+// 创建日期:	2013年9月12日
+// 创建人:		陆利民
+// 版权所有:	苏州蜗牛电子有限公司
+//--------------------------------------------------------------------
 
 #ifndef _RENDER_HEADER_H
 #define _RENDER_HEADER_H
@@ -25,6 +33,8 @@
 	#endif
 
 #endif
+
+#include "../math/fm_math.h"
 
 #ifdef FX_SYSTEM_WINDOWS
 #pragma comment(lib, "../extern/ogles2/lib/libegl.lib")
