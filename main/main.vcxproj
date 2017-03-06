@@ -21,7 +21,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -42,24 +42,26 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)bin</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>../extern/ogles2/include</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>../debug/;../extern/ogles2/lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>core.lib;game.lib;math.lib;render.lib;libEGL.lib;libGLESv2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>core.lib;game.lib;math.lib;render.lib;world.lib;libEGL.lib;libGLESv2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>../bin/$(ProjectName).exe</OutputFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -85,6 +87,87 @@
     <ClCompile Include="win_main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\public\auto_mem.h" />
+    <ClInclude Include="..\public\char_traits.h" />
+    <ClInclude Include="..\public\core_config.h" />
+    <ClInclude Include="..\public\core_file.h" />
+    <ClInclude Include="..\public\core_log.h" />
+    <ClInclude Include="..\public\core_mem.h" />
+    <ClInclude Include="..\public\core_type.h" />
+    <ClInclude Include="..\public\debug.h" />
+    <ClInclude Include="..\public\fast_str.h" />
+    <ClInclude Include="..\public\fixedpoint.h" />
+    <ClInclude Include="..\public\inlines.h" />
+    <ClInclude Include="..\public\i_core.h" />
+    <ClInclude Include="..\public\i_entity.h" />
+    <ClInclude Include="..\public\i_ent_creator.h" />
+    <ClInclude Include="..\public\i_ent_info.h" />
+    <ClInclude Include="..\public\i_file_sys.h" />
+    <ClInclude Include="..\public\i_ini_file.h" />
+    <ClInclude Include="..\public\i_interface.h" />
+    <ClInclude Include="..\public\i_int_creator.h" />
+    <ClInclude Include="..\public\i_var.h" />
+    <ClInclude Include="..\public\i_var_list.h" />
+    <ClInclude Include="..\public\i_var_table.h" />
+    <ClInclude Include="..\public\macros.h" />
+    <ClInclude Include="..\public\math.h" />
+    <ClInclude Include="..\public\mathtable.h" />
+    <ClInclude Include="..\public\matrix.h" />
+    <ClInclude Include="..\public\module.h" />
+    <ClInclude Include="..\public\persistid.h" />
+    <ClInclude Include="..\public\portable.h" />
+    <ClInclude Include="..\public\quaternion.h" />
+    <ClInclude Include="..\public\var.h" />
+    <ClInclude Include="..\public\var_getter.h" />
+    <ClInclude Include="..\public\var_list.h" />
+    <ClInclude Include="..\public\var_setter.h" />
+    <ClInclude Include="..\public\var_table.h" />
+    <ClInclude Include="..\public\var_traits.h" />
+    <ClInclude Include="..\public\var_type.h" />
+    <ClInclude Include="..\public\vector.h" />
+    <ClInclude Include="..\system\ios_encoding.h" />
+    <ClInclude Include="..\system\ios_filesys.h" />
+    <ClInclude Include="..\system\ios_lock.h" />
+    <ClInclude Include="..\system\ios_lockval.h" />
+    <ClInclude Include="..\system\ios_portable.h" />
+    <ClInclude Include="..\system\ios_string.h" />
+    <ClInclude Include="..\system\ios_thread.h" />
+    <ClInclude Include="..\system\linux_encoding.h" />
+    <ClInclude Include="..\system\linux_filesys.h" />
+    <ClInclude Include="..\system\linux_lock.h" />
+    <ClInclude Include="..\system\linux_lockval.h" />
+    <ClInclude Include="..\system\linux_portable.h" />
+    <ClInclude Include="..\system\linux_string.h" />
+    <ClInclude Include="..\system\linux_thread.h" />
+    <ClInclude Include="..\system\win_encoding.h" />
+    <ClInclude Include="..\system\win_filesys.h" />
+    <ClInclude Include="..\system\win_lock.h" />
+    <ClInclude Include="..\system\win_lockval.h" />
+    <ClInclude Include="..\system\win_portable.h" />
+    <ClInclude Include="..\system\win_string.h" />
+    <ClInclude Include="..\system\win_thread.h" />
+    <ClInclude Include="..\utils\array_pod.h" />
+    <ClInclude Include="..\utils\fix_msg_buf.h" />
+    <ClInclude Include="..\utils\game_timer.h" />
+    <ClInclude Include="..\utils\literal_pod.h" />
+    <ClInclude Include="..\utils\lock_util.h" />
+    <ClInclude Include="..\utils\pod_hash_map.h" />
+    <ClInclude Include="..\utils\pod_traits.h" />
+    <ClInclude Include="..\utils\share_mem.h" />
+    <ClInclude Include="..\utils\string_pod.h" />
+    <ClInclude Include="..\utils\string_traits.h" />
+    <ClInclude Include="..\utils\thread.h" />
+    <ClInclude Include="..\utils\tick_timer.h" />
+    <ClInclude Include="..\visual\define.h" />
+    <ClInclude Include="..\visual\header.h" />
+    <ClInclude Include="..\visual\i_context.h" />
+    <ClInclude Include="..\visual\i_render.h" />
+    <ClInclude Include="..\visual\i_resource.h" />
+    <ClInclude Include="..\visual\i_res_base.h" />
+    <ClInclude Include="..\visual\i_texture.h" />
+    <ClInclude Include="..\visual\i_vis_base.h" />
+    <ClInclude Include="..\visual\i_world.h" />
+    <ClInclude Include="..\visual\vis_utils.h" />
     <ClInclude Include="app.h" />
     <ClInclude Include="win_graphdevice.h" />
   </ItemGroup>

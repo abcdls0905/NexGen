@@ -5,79 +5,182 @@
       <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="Perf_Debug|Win32">
+      <Configuration>Perf_Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Release|Win32">
       <Configuration>Release</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{65DCAEA5-3755-4338-9B04-44A3BAFBF8EF}</ProjectGuid>
+    <ProjectGuid>{417353AC-9519-4E44-8240-7F4D1C0C0B8B}</ProjectGuid>
+    <RootNamespace>fm_core</RootNamespace>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>core</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Perf_Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
-    <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
-    <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Perf_Debug|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup>
+    <_ProjectFileVersion>12.0.21005.1</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Perf_Debug|Win32'">
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader />
+      <ProgramDataBaseFileName>$(OutDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
     </ClCompile>
-    <Link>
-      <SubSystem>Windows</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
-      <Optimization>MaxSpeed</Optimization>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PrecompiledHeader />
+      <ProgramDataBaseFileName>$(OutDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
-    <Link>
-      <SubSystem>Windows</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <OptimizeReferences>true</OptimizeReferences>
-    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Perf_Debug|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PrecompiledHeader />
+      <ProgramDataBaseFileName>$(OutDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Text Include="ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
+    <ClInclude Include="..\public\auto_mem.h" />
+    <ClInclude Include="..\public\char_traits.h" />
+    <ClInclude Include="..\public\converts.h" />
+    <ClInclude Include="..\public\core_config.h" />
+    <ClInclude Include="..\public\core_file.h" />
+    <ClInclude Include="..\public\core_log.h" />
+    <ClInclude Include="..\public\core_mem.h" />
+    <ClInclude Include="..\public\core_type.h" />
+    <ClInclude Include="..\public\debug.h" />
+    <ClInclude Include="..\public\ent_class_id.h" />
+    <ClInclude Include="..\public\except_msg.h" />
+    <ClInclude Include="..\public\fast_str.h" />
+    <ClInclude Include="..\public\i_core.h" />
+    <ClInclude Include="..\public\i_ent_creator.h" />
+    <ClInclude Include="..\public\i_ent_info.h" />
+    <ClInclude Include="..\public\i_entity.h" />
+    <ClInclude Include="..\public\i_file_sys.h" />
+    <ClInclude Include="..\public\i_ini_file.h" />
+    <ClInclude Include="..\public\i_int_creator.h" />
+    <ClInclude Include="..\public\i_interface.h" />
+    <ClInclude Include="..\public\i_var.h" />
+    <ClInclude Include="..\public\i_var_list.h" />
+    <ClInclude Include="..\public\i_var_table.h" />
+    <ClInclude Include="..\public\inlines.h" />
+    <ClInclude Include="..\public\macros.h" />
+    <ClInclude Include="..\public\module.h" />
+    <ClInclude Include="..\public\persistid.h" />
+    <ClInclude Include="..\public\portable.h" />
+    <ClInclude Include="..\public\var.h" />
+    <ClInclude Include="..\public\var_getter.h" />
+    <ClInclude Include="..\public\var_list.h" />
+    <ClInclude Include="..\public\var_setter.h" />
+    <ClInclude Include="..\public\var_table.h" />
+    <ClInclude Include="..\public\var_traits.h" />
+    <ClInclude Include="..\public\var_type.h" />
+    <ClInclude Include="..\utils\array_hash_map.h" />
+    <ClInclude Include="..\utils\array_literal_map.h" />
+    <ClInclude Include="..\utils\array_pod.h" />
+    <ClInclude Include="..\utils\fix_msg_buf.h" />
+    <ClInclude Include="..\utils\game_timer.h" />
+    <ClInclude Include="..\utils\ini_file.h" />
+    <ClInclude Include="..\utils\literal_pod.h" />
+    <ClInclude Include="..\utils\load_archive.h" />
+    <ClInclude Include="..\utils\lock_util.h" />
+    <ClInclude Include="..\utils\memory_bucket.h" />
+    <ClInclude Include="..\utils\mutex.h" />
+    <ClInclude Include="..\utils\pod_hash_map.h" />
+    <ClInclude Include="..\utils\pod_traits.h" />
+    <ClInclude Include="..\utils\share_mem.h" />
+    <ClInclude Include="..\utils\store_archive.h" />
+    <ClInclude Include="..\utils\stream_writer.h" />
+    <ClInclude Include="..\utils\string_alias.h" />
+    <ClInclude Include="..\utils\string_pod.h" />
+    <ClInclude Include="..\utils\string_traits.h" />
+    <ClInclude Include="..\utils\thread.h" />
+    <ClInclude Include="..\utils\tick_timer.h" />
     <ClInclude Include="core.h" />
+    <ClInclude Include="ent_factory.h" />
+    <ClInclude Include="ent_info.h" />
+    <ClInclude Include="ent_info_list.h" />
+    <ClInclude Include="ent_manager.h" />
+    <ClInclude Include="file_sys.h" />
+    <ClInclude Include="hook_manager.h" />
+    <ClInclude Include="ini_file.h" />
+    <ClInclude Include="int_manager.h" />
+    <ClInclude Include="log_file.h" />
+    <ClInclude Include="memory_check.h" />
+    <ClInclude Include="memory_pool.h" />
+    <ClInclude Include="win_msg_buf.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="core.cpp" />
+    <ClCompile Include="ent_factory.cpp" />
+    <ClCompile Include="ent_info.cpp" />
+    <ClCompile Include="ent_info_list.cpp" />
+    <ClCompile Include="ent_manager.cpp" />
+    <ClCompile Include="file_sys.cpp" />
+    <ClCompile Include="hook_manager.cpp" />
+    <ClCompile Include="ini_file.cpp" />
+    <ClCompile Include="int_manager.cpp" />
+    <ClCompile Include="log_file.cpp" />
+    <ClCompile Include="memory_pool.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

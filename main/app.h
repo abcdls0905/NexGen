@@ -4,10 +4,12 @@
 
 #include "../public/i_var_list.h"
 #include "../public/var_list.h"
+#include "../utils/game_timer.h"
 
 class App
 {
 private:
+	CGameTimer m_timer;
 	int m_width;
 	int m_height;
 	bool m_initok;
