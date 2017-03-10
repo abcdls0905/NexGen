@@ -55,7 +55,7 @@ static int isnormal(double x)
 
 //ls test
 #if defined(_MSC_VER)
-static double copysign_temp(double x, double y)
+static double copysign(double x, double y)
 {
    return _copysign(x, y);
 }
