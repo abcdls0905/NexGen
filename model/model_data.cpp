@@ -71,6 +71,30 @@ void init_node_key_index()
   }
 }
 
+FmVec3 CalculateNormal(float *p1, float *p2, float *p3)
+{
+  float a[3], b[3], result[3];
+  float length;
+
+  a[0] = p1[0] - p2[0];
+  a[1] = p1[1] - p2[1];
+  a[2] = p1[2] - p2[2];
+
+  b[0] = p1[0] - p3[0];
+  b[1] = p1[1] - p3[1];
+  b[2] = p1[2] - p3[2];
+
+  result[0] = a[1] * b[2] - b[1] * a[2];
+  result[1] = b[0] * a[2] - a[0] * b[2];
+  result[2] = a[0] * b[1] - b[0] * a[1];
+
+  // calculate the length of the normal
+  length = (float)sqrt(result[0]*result[0] + result[1]*result[1] + result[2]*result[2]);
+
+  // normalize and specify the normal
+  return FmVec3(result[0] / length, result[1] / length, result[2] / length);
+}
+
 model_t* load_md2_model(const char* pszModelName)
 {
   //CORE_LOG_DEVELOPER("[START] LoadVertexAniModel(%s)\n", pszModelName);
@@ -144,33 +168,39 @@ model_t* load_md2_model(const char* pszModelName)
       material->MatInfo;
 
       //只取第一帧静态数据
-      //build ib
+      //build vb
       FmVec3* startFrame = &vertexs[0];
       int trianglesCount = header.numTris;
-      float* vexts = new float[trianglesCount * 15];
+      float* vexts = new float[trianglesCount * 18];
       //float* uvs = new float[trianglesCount * 6];
       for (int k = 0; k < header.numTris; ++k)
       {
         Md2Triangle& triIdx = triangles[k];
-        vexts[k*15+0] = startFrame[triIdx.vertexIndices[0]].x;
-        vexts[k*15+1] = startFrame[triIdx.vertexIndices[0]].y;
-        vexts[k*15+2] = startFrame[triIdx.vertexIndices[0]].z;
-        vexts[k*15+3] = startFrame[triIdx.vertexIndices[1]].x;
-        vexts[k*15+4] = startFrame[triIdx.vertexIndices[1]].y;
-        vexts[k*15+5] = startFrame[triIdx.vertexIndices[1]].z;
-        vexts[k*15+6] = startFrame[triIdx.vertexIndices[2]].x;
-        vexts[k*15+7] = startFrame[triIdx.vertexIndices[2]].y;
-        vexts[k*15+8] = startFrame[triIdx.vertexIndices[2]].z;
-        vexts[k*15+9] = texCoords[triIdx.stIndices[0]].s;
-        vexts[k*15+10] = texCoords[triIdx.stIndices[0]].t;
-        vexts[k*15+11] = texCoords[triIdx.stIndices[1]].s;
-        vexts[k*15+12] = texCoords[triIdx.stIndices[1]].s;
-        vexts[k*15+13] = texCoords[triIdx.stIndices[2]].s;
-        vexts[k*15+14] = texCoords[triIdx.stIndices[2]].s;
+        vexts[k*18+0] = startFrame[triIdx.vertexIndices[0]].x;
+        vexts[k*18+1] = startFrame[triIdx.vertexIndices[0]].y;
+        vexts[k*18+2] = startFrame[triIdx.vertexIndices[0]].z;
+        vexts[k*18+3] = startFrame[triIdx.vertexIndices[1]].x;
+        vexts[k*18+4] = startFrame[triIdx.vertexIndices[1]].y;
+        vexts[k*18+5] = startFrame[triIdx.vertexIndices[1]].z;
+        vexts[k*18+6] = startFrame[triIdx.vertexIndices[2]].x;
+        vexts[k*18+7] = startFrame[triIdx.vertexIndices[2]].y;
+        vexts[k*18+8] = startFrame[triIdx.vertexIndices[2]].z;
+        vexts[k*18+9] = texCoords[triIdx.stIndices[0]].s;
+        vexts[k*18+10] = texCoords[triIdx.stIndices[0]].t;
+        vexts[k*18+11] = texCoords[triIdx.stIndices[1]].s;
+        vexts[k*18+12] = texCoords[triIdx.stIndices[1]].s;
+        vexts[k*18+13] = texCoords[triIdx.stIndices[2]].s;
+        vexts[k*18+14] = texCoords[triIdx.stIndices[2]].s;
+        float p1[3] = {vexts[k*15+0], vexts[k*15+1], vexts[k*15+2]};
+        float p2[3] = {vexts[k*15+3], vexts[k*15+4], vexts[k*15+5]};
+        float p3[3] = {vexts[k*15+6], vexts[k*15+7], vexts[k*15+8]};
+        FmVec3 normal = CalculateNormal(p1, p2, p3);
+        vexts[k*18+15] = normal.x;
+        vexts[k*18+16] = normal.y;
+        vexts[k*18+17] = normal.z;
+
       }
       //material->pGPUIB = g_pRender->CreateStaticIB(pMat->pLODIB[pMat->nCurLODLevel], ib_size);
-
-      //build vb
 
       //setmatnfo
       delete [] vertexs;
