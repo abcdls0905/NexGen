@@ -171,39 +171,38 @@ model_t* load_md2_model(const char* pszModelName)
       //build vb
       FmVec3* startFrame = &vertexs[0];
       int trianglesCount = header.numTris;
-      float* vexts = new float[trianglesCount * 18];
+      material->vexts = new float[trianglesCount * 18];
       //float* uvs = new float[trianglesCount * 6];
       for (int k = 0; k < header.numTris; ++k)
       {
         Md2Triangle& triIdx = triangles[k];
-        vexts[k*18+0] = startFrame[triIdx.vertexIndices[0]].x;
-        vexts[k*18+1] = startFrame[triIdx.vertexIndices[0]].y;
-        vexts[k*18+2] = startFrame[triIdx.vertexIndices[0]].z;
-        vexts[k*18+3] = startFrame[triIdx.vertexIndices[1]].x;
-        vexts[k*18+4] = startFrame[triIdx.vertexIndices[1]].y;
-        vexts[k*18+5] = startFrame[triIdx.vertexIndices[1]].z;
-        vexts[k*18+6] = startFrame[triIdx.vertexIndices[2]].x;
-        vexts[k*18+7] = startFrame[triIdx.vertexIndices[2]].y;
-        vexts[k*18+8] = startFrame[triIdx.vertexIndices[2]].z;
-        vexts[k*18+9] = texCoords[triIdx.stIndices[0]].s;
-        vexts[k*18+10] = texCoords[triIdx.stIndices[0]].t;
-        vexts[k*18+11] = texCoords[triIdx.stIndices[1]].s;
-        vexts[k*18+12] = texCoords[triIdx.stIndices[1]].s;
-        vexts[k*18+13] = texCoords[triIdx.stIndices[2]].s;
-        vexts[k*18+14] = texCoords[triIdx.stIndices[2]].s;
-        float p1[3] = {vexts[k*15+0], vexts[k*15+1], vexts[k*15+2]};
-        float p2[3] = {vexts[k*15+3], vexts[k*15+4], vexts[k*15+5]};
-        float p3[3] = {vexts[k*15+6], vexts[k*15+7], vexts[k*15+8]};
+        material->vexts[k*18+0] = startFrame[triIdx.vertexIndices[0]].x;
+        material->vexts[k*18+1] = startFrame[triIdx.vertexIndices[0]].y;
+        material->vexts[k*18+2] = startFrame[triIdx.vertexIndices[0]].z;
+        material->vexts[k*18+3] = startFrame[triIdx.vertexIndices[1]].x;
+        material->vexts[k*18+4] = startFrame[triIdx.vertexIndices[1]].y;
+        material->vexts[k*18+5] = startFrame[triIdx.vertexIndices[1]].z;
+        material->vexts[k*18+6] = startFrame[triIdx.vertexIndices[2]].x;
+        material->vexts[k*18+7] = startFrame[triIdx.vertexIndices[2]].y;
+        material->vexts[k*18+8] = startFrame[triIdx.vertexIndices[2]].z;
+        material->vexts[k*18+9] = texCoords[triIdx.stIndices[0]].s;
+        material->vexts[k*18+10] = texCoords[triIdx.stIndices[0]].t;
+        material->vexts[k*18+11] = texCoords[triIdx.stIndices[1]].s;
+        material->vexts[k*18+12] = texCoords[triIdx.stIndices[1]].s;
+        material->vexts[k*18+13] = texCoords[triIdx.stIndices[2]].s;
+        material->vexts[k*18+14] = texCoords[triIdx.stIndices[2]].s;
+        float p1[3] = {material->vexts[k*15+0], material->vexts[k*15+1], material->vexts[k*15+2]};
+        float p2[3] = {material->vexts[k*15+3], material->vexts[k*15+4], material->vexts[k*15+5]};
+        float p3[3] = {material->vexts[k*15+6], material->vexts[k*15+7], material->vexts[k*15+8]};
         FmVec3 normal = CalculateNormal(p1, p2, p3);
-        vexts[k*18+15] = normal.x;
-        vexts[k*18+16] = normal.y;
-        vexts[k*18+17] = normal.z;
+        material->vexts[k*18+15] = normal.x;
+        material->vexts[k*18+16] = normal.y;
+        material->vexts[k*18+17] = normal.z;
 
+        int x = 0;
       }
       //material->pGPUIB = g_pRender->CreateStaticIB(pMat->pLODIB[pMat->nCurLODLevel], ib_size);
 
-      //setmatnfo
-      delete [] vertexs;
     }
   }
 

@@ -285,9 +285,10 @@ struct node_material_t
   char* pszName;
 	unsigned int nVertexCount;
 	vertex_data_t SingleVB;				//顶点信息
-	IStaticIB* pGPUIB;					//顶点缓冲
+	IStaticIB* pGPUIB;					  //顶点缓冲
 	IStaticVB* pSingleGPUVB;
-	material_info_t MatInfo; // 材质数据
+	material_info_t MatInfo;      // 材质数据
+  float* vexts;                 //顶点数据
 };
 
 // 模型节点

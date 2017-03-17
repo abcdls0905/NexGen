@@ -349,8 +349,8 @@ bool load_model_texture(model_t* pModel, const char* tex_paths, bool async)
 		// 加载各个结点的贴图
 		for (unsigned int i = 0; i < pModel->nRootNodeCount; ++i)
 		{
-			load_model_node_texture(&pModel->RootNodes[i], pModel->pszTexBase, 
-				tex_paths, async);
+      //ls test
+			//load_model_node_texture(&pModel->RootNodes[i], pModel->pszTexBase, tex_paths, async);
 		}
 	}
 
