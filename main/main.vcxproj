@@ -60,8 +60,9 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>../debug/;../extern/ogles2/lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>core.lib;game.lib;math.lib;render.lib;world.lib;libEGL.lib;libGLESv2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>core.lib;math.lib;render.lib;world.lib;terrain.lib;model.lib;game.lib;libEGL.lib;libGLESv2.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>../bin/$(ProjectName).exe</OutputFile>
+      <IgnoreSpecificDefaultLibraries>LIBCMTD.lib</IgnoreSpecificDefaultLibraries>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

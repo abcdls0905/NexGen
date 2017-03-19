@@ -243,8 +243,16 @@ static result_string get_work_path(const char* exe)
 	return result_string(buf);
 }
 
+extern ICore* g_core;
+
 LRESULT CALLBACK WndProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 {
+  if(g_core)
+  {
+    int result;
+    if(App::Inst().OnMsg(iMsg, wParam, lParam, result))
+      return result;
+  }
 	switch (iMsg)
 	{
  	case WM_CLOSE:
@@ -397,6 +405,7 @@ int WinMainProc(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine,
 		App::Inst().OnFrame();
 		App::Inst().OnRender();
 		graphedevice.Present();
+
 	}
 
 	// ºËÐÄ¹Ø±Õ

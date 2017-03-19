@@ -37,6 +37,8 @@
 extern void lib_main_world();
 extern void lib_main_render();
 extern void lib_main_game();
+extern void lib_main_model();
+extern void lib_main_terrain();
 
 // 加载核心配置文件
 static bool load_core_config(CCoreConfig& config)
@@ -63,9 +65,11 @@ static void show_fatal_error(const char* info)
 
 void App::Init(const char* workpath, const IVarList& args, int screen_width, int screen_height, float scale)
 {
+  lib_main_render();
 	lib_main_world();
-	lib_main_render();
-	lib_main_game;
+	lib_main_game();
+  lib_main_model();
+  lib_main_terrain();
 
 	ICore* core = NULL;
 	IWorld* pWorld = NULL;
@@ -152,7 +156,7 @@ void App::Shutdown()
 
 bool App::OnMsg(unsigned int msg, size_t param1, size_t param2, int& result)
 {
-	return true;
+  return g_core->ProcessMessage(msg, param1, param2, result);
 }
 
 void App::OnInput(const char* utf8)
