@@ -15,9 +15,21 @@ public:
 		SCENETYPE_DEFAULT,
 		SCENETYPE_GUI,
 	};
-	// 渲染器参数
-	virtual IRenderContext* GetContext() const = 0;
-	
+  virtual void Realize() = 0;
+  virtual ISceneView* GetSceneView() const = 0;
+  virtual IRenderContext* GetContext() const = 0;
+  // 添加可视对象
+  virtual bool AddObject(const PERSISTID& obj, int priority) = 0;
+  // 删除可视对象
+  virtual bool RemoveObject(const PERSISTID& obj) = 0;
+  // 按优先级删除对象
+  virtual bool RemoveObjectByPrior(int priority) = 0;
+
+  // 创建可视对象
+  virtual PERSISTID Create(const char* name) = 0;
+  /*
+  // 渲染器参数
+  virtual IRenderContext* GetContext() const = 0;
 	// 获得天气对象
 	virtual PERSISTID GetWeatherID() = 0;
 	
@@ -144,6 +156,8 @@ public:
 	// vResult.z = top
 	// vResult.w = bottom
 	virtual const FmVec4& GetShadowAdjustingRect() = 0;
+
+  */
 };
 
 #endif

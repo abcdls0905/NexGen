@@ -1,11 +1,3 @@
-//--------------------------------------------------------------------
-// 文件名:		i_actor.h
-// 内  容:		
-// 说  明:		
-// 创建日期:	2011年2月28日
-// 创建人:		杨利平
-// 版权所有:	苏州蜗牛电子有限公司
-//--------------------------------------------------------------------
 
 #ifndef _VISUAL_I_ACTOR_H
 #define _VISUAL_I_ACTOR_H
@@ -17,6 +9,7 @@
 class IActor: public IVisBase
 {
 public:
+  /*
 	// 通过配置文件加载组合模型
 	virtual bool CreateFromIni(const char* pFileName) = 0;
 	virtual bool CreateFromIniEx(const char* pFileName, const char* append_path) = 0;
@@ -230,6 +223,7 @@ public:
 
 	// 节点残影效果对象
 	virtual PERSISTID GetNodeBrokenShadowID(const char* pName) const = 0;
+  */
 };
 
 #endif // _VISUAL_I_ACTOR_H

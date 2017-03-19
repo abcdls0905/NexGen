@@ -1,17 +1,8 @@
-//--------------------------------------------------------------------
-// 文件名:		i_terrain.h
-// 内  容:		
-// 说  明:		
-// 创建日期:	2010年8月9日
-// 创建人:		陆利民
-// 版权所有:	苏州蜗牛电子有限公司
-//--------------------------------------------------------------------
 
 #ifndef _VISUAL_I_TERRAIN_H
 #define _VISUAL_I_TERRAIN_H
 
 #include "i_vis_base.h"
-//#include "i_dx_render.h"
 
 // 地形对象基类
 
@@ -50,6 +41,7 @@ public:
 	};
 	
 public:
+  /*
 	// 获得加载百分比
 	virtual float GetLoadPercent() = 0;
 
@@ -645,6 +637,7 @@ public:
 
 	// 地形删除之前删除所有地块的加载器
 	virtual bool ReleaseAllZoneLoader()= 0;
+  */
 };
 
 #endif // _VISUAL_I_TERRAIN_H
