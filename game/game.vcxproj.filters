@@ -7,9 +7,19 @@
     <ClCompile Include="lib_main.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="global.cpp" />
+    <ClCompile Include="game_control .cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game.h" />
     <ClInclude Include="global.h" />
+    <ClInclude Include="game_control.h" />
+    <ClInclude Include="util\macro_util.h">
+      <Filter>util</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="util">
+      <UniqueIdentifier>{f8789fec-2e2d-46fc-a1ef-fb09bd08da17}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>
