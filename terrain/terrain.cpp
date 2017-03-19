@@ -51,3 +51,45 @@ IRenderContext* Terrain::GetContext() const
 {
   return m_pContext;
 }
+
+void Terrain::Update(float seconds)
+{
+
+}
+
+void Terrain::Realize()
+{
+  int render_size = m_Visuals.size();
+  for (size_t i = 0; i < render_size; ++i)
+  {
+    IVisBase* pVisBase = m_Visuals[i];
+    pVisBase->Realize();
+  }
+}
+
+bool Terrain::AddVisualRole(const char* name, const PERSISTID& id)
+{
+  IVisBase* pVisBase = (IVisBase*)GetCore()->GetEntity(id);
+  if (NULL == pVisBase)
+    return false;
+  if (!pVisBase->GetEntInfo()->IsKindOf("IVisBase"))
+    return false;
+  return AddVisBase(name, pVisBase, true, 0.0F) == RESULT_SUCCESS;
+}
+
+bool Terrain::AddVisual(const char* name, const PERSISTID& id)
+{
+  IVisBase* pVisBase = (IVisBase*)GetCore()->GetEntity(id);
+  if (NULL == pVisBase)
+    return false;
+  if (!pVisBase->GetEntInfo()->IsKindOf("IVisBase"))
+    return false;
+  return AddVisBase(name, pVisBase, true, 0.0F) == RESULT_SUCCESS;
+}
+
+int Terrain::AddVisBase(const char* name, IVisBase* pVisBase, bool is_role, float clip_radius)
+{
+  Assert(pVisBase != NULL);
+  m_Visuals.push_back(pVisBase);
+  return RESULT_SUCCESS;
+}

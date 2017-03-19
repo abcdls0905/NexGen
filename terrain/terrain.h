@@ -15,6 +15,7 @@ class Terrain: public ITerrain
 protected:
   //IRenderContext* m_pContext;
   IRender* m_pRender;
+  TArrayPod<IVisBase*, 1> m_Visuals;
 public:
   Terrain();
   virtual ~Terrain();
@@ -25,6 +26,15 @@ public:
   // 设置场景上下文
   virtual void SetContext(IRenderContext* value);
   virtual IRenderContext* GetContext() const;
+  virtual void Update(float seconds);
+  virtual void Realize();
+  // 添加人物角色
+  bool AddVisualRole(const char* name, const PERSISTID& id);
+  // 添加地面物体
+  bool AddVisual(const char* name, const PERSISTID& id);
+  // 添加地面物体
+  virtual int AddVisBase(const char* name, IVisBase* pVisBase, 
+    bool is_role, float clip_radius);
 };
 
 #endif
