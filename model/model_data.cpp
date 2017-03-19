@@ -7,7 +7,14 @@
 #include "../public/inlines.h"
 #include "../public/core_file.h"
 #include "../public/core_log.h"
+#include "../visual/i_render.h"
 
+#include "../render/render_header.h"
+
+extern IRender* g_pRender;
+
+// 初始化材质数据
+void init_material_value(material_info_t* pMatInfo);
 
 struct node_key_index_t
 {
@@ -162,6 +169,7 @@ model_t* load_md2_model(const char* pszModelName)
     for (int j = 0; j < root->nMaterialCount; ++j)
     {
       node_material_t* material = &root->Materials[j];
+      init_material_value(&material->MatInfo);
       //关键构造
       material->pGPUIB;
       material->pSingleGPUVB;
@@ -198,11 +206,15 @@ model_t* load_md2_model(const char* pszModelName)
         material->vexts[k*18+15] = normal.x;
         material->vexts[k*18+16] = normal.y;
         material->vexts[k*18+17] = normal.z;
-
-        int x = 0;
       }
-      //material->pGPUIB = g_pRender->CreateStaticIB(pMat->pLODIB[pMat->nCurLODLevel], ib_size);
-
+      unsigned short* indices = new unsigned short[header.numTris * 3];
+      for (int k = 0; k < header.numTris * 3; ++k)
+      {
+        indices[k] = k;
+      }
+      int ib_size = header.numTris * 3 * sizeof(unsigned short);
+      //material->pGPUIB = g_pRender->CreateStaticIB(indices, ib_size);
+      //material->pSingleGPUVB = g_pRender->CreateStaticVB(material->vexts, (unsigned int)header.numTris * 18);
     }
   }
 
