@@ -27,6 +27,7 @@ bool Game::Init(const IVarList& args)
   PERSISTID terrain_id = g_scene->Create("Terrain");
   ITerrain* pTerrain = (ITerrain*) g_core->GetEntity(terrain_id);
   g_terrain = pTerrain;
+  g_scene->AddObject(terrain_id, 0);
   //设置主场景实体
   g_world->SetMainSceneID(g_scene->GetID());
   g_core->AddMsgProc(this, WM_LBUTTONDOWN);
