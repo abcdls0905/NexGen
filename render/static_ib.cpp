@@ -1,11 +1,3 @@
-//--------------------------------------------------------------------
-// 文件名:		static_ib.cpp
-// 内  容:		
-// 说  明:		
-// 创建日期:	2009年6月25日
-// 创建人:		陆利民
-// 版权所有:	苏州蜗牛电子有限公司
-//--------------------------------------------------------------------
 
 #include "static_ib.h"
 #include "render.h"
@@ -74,9 +66,10 @@ bool CStaticIB::Create(int format, const void* pdata, unsigned int size)
 	
 	IRenderDrawOp* pRenderDrawOp = m_pRender->GetRenderDrawOp();
 	
-	glGenBuffers(1, &m_nBuffer);
+  glGenBuffers(1, &m_nBuffer);
+
+  bool buffer = glIsBuffer(m_nBuffer);
 	pRenderDrawOp->SetIB( m_nBuffer );
-	TestErr("CStaticIB restore pre");
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_nSize, pData, GL_STATIC_DRAW);
 
 	CORE_FREE(pData, m_nSize);
