@@ -1,17 +1,21 @@
-﻿生成启动时间为 2017/3/10 23:04:34。
+﻿生成启动时间为 2017/3/19 18:43:33。
      1>项目“E:\SVNPro\NexGen\world\world.vcxproj”在节点 2 上(Build 个目标)。
        项目文件包含 ToolsVersion="12.0" 设置，但此工具集未知或缺失。您可以通过为此工具集安装相应的 .NET Framework 来解决此问题。将项目视为具有 ToolsVersion="4.0" 设置。
      1>ClCompile:
-         E:\Program\vs2012\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _LIB /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt world.cpp world_main.cpp
+         E:\Program\vs2012\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _LIB /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt actor.cpp scene.cpp world.cpp world_main.cpp
          world_main.cpp
          world.cpp
+         scene.cpp
+         actor.cpp
          正在生成代码...
        Lib:
-         E:\Program\vs2012\VC\bin\Lib.exe /OUT:"E:\SVNPro\NexGen\Debug\world.lib" /NOLOGO Debug\world.obj
+         E:\Program\vs2012\VC\bin\Lib.exe /OUT:"E:\SVNPro\NexGen\Debug\world.lib" /NOLOGO Debug\actor.obj
+         Debug\scene.obj
+         Debug\world.obj
          Debug\world_main.obj
          world.vcxproj -> E:\SVNPro\NexGen\Debug\world.lib
      1>已完成生成项目“E:\SVNPro\NexGen\world\world.vcxproj”(Build 个目标)的操作。
 
 生成成功。
 
-已用时间 00:00:02.13
+已用时间 00:00:02.76

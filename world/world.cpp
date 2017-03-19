@@ -1,5 +1,6 @@
 
 #include "world.h"
+#include "scene.h"
 #include "../visual/i_vis_base.h"
 #include "../visual/i_texture.h"
 #include "../public/var_list.h"
@@ -16,6 +17,7 @@ World::World()
 	m_nWidth = 800;
 	m_nHeight = 600;
 	m_pRender = NULL;
+  m_pMainScene = NULL;
 }
 
 World::~World()
@@ -40,6 +42,18 @@ void World::Execute(float seconds)
 
 void World::Display(float offset_seconds)
 {
+#ifdef PERFORMANCE_DEBUG
+  double dRealizeTime = performance_time();
+#endif
+  // ÏÈäÖÈ¾³¡¾°
+  if (m_pMainScene)
+  {
+    m_pMainScene->Realize();
+  }
+#ifdef PERFORMANCE_DEBUG
+  m_pRender->GetPerformance()->dRealizeTime += 
+    performance_time() - dRealizeTime;
+#endif
 	m_pRender->BeginFrame(m_nBackColor);
 	m_pRender->EndFrame();
 }
@@ -82,4 +96,31 @@ bool World::CreateDevice(bool multithreading)
 void World::SetBackColor(const char* value)
 {
 	m_nBackColor = VisUtil_ColorToInt(value);
+}
+
+void World::SetMainSceneID(const PERSISTID& id)
+{
+  if (id.IsNull())
+  {
+    m_pMainScene = NULL;
+    return;
+  }
+
+  IEntity* pEntity = GetCore()->GetEntity(id);
+
+  if (NULL == pEntity)
+  {
+    return;
+  }
+
+  m_pMainScene = (Scene*)pEntity;
+}
+
+PERSISTID World::GetMainSceneID() const
+{
+  if (NULL == m_pMainScene)
+  {
+    return PERSISTID();
+  }
+  return m_pMainScene->GetID();
 }

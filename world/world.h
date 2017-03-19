@@ -9,15 +9,19 @@
 #include "../public/core_type.h"
 
 #include "../visual/i_world.h"
+#include "Scene.h"
 
 class IRender;
+class Scene;
+
 class World : public IWorld
 {
 private:
 	int m_nWidth;
 	int m_nHeight;
 	IRender* m_pRender;
-	unsigned int m_nBackColor;
+  unsigned int m_nBackColor;
+  Scene* m_pMainScene;
 public:
 	World();
 	virtual ~World();
@@ -38,7 +42,12 @@ public:
 	virtual bool CreateDevice(bool multithreading = false);
 	virtual void Display(float offset_seconds);
 	// 背景颜色
-	virtual void SetBackColor(const char* value);
+  virtual void SetBackColor(const char* value);
+
+  // 主场景对象
+  void SetMainSceneID(const PERSISTID& id);
+  PERSISTID GetMainSceneID() const;
+  IScene* GetMainScene() const { return m_pMainScene; }
 };
 
 #endif

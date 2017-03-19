@@ -6,5 +6,7 @@
 
 void lib_main_world()
 {
-	REG_ENTITY(World);
+  REG_ENTITY(World);
+  REG_ENTITY(Actor);
+  REG_ENTITY(Scene);
 }

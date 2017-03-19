@@ -5,9 +5,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="world.h" />
+    <ClInclude Include="actor.h" />
+    <ClInclude Include="scene.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="world.cpp" />
     <ClCompile Include="world_main.cpp" />
+    <ClCompile Include="actor.cpp" />
+    <ClCompile Include="scene.cpp" />
   </ItemGroup>
 </Project>

@@ -74,9 +74,13 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="actor.h" />
+    <ClInclude Include="scene.h" />
     <ClInclude Include="world.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="actor.cpp" />
+    <ClCompile Include="scene.cpp" />
     <ClCompile Include="world.cpp" />
     <ClCompile Include="world_main.cpp" />
   </ItemGroup>
