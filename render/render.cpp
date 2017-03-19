@@ -1003,31 +1003,17 @@ void Render::BeginFrame(unsigned int back_color)
 #ifdef PERFORMANCE_DEBUG
 	double dRenderTime = performance_time();
 #endif
+
 	m_vBackColor = VisUtil_ColorToVector4(back_color);
 
-// 	m_pRenderDrawOp->SetClearColor( m_vBackColor );
-// 	m_pRenderDrawOp->SetClearDepth( 1.0F );
-// 	m_pRenderDrawOp->SetClearStencil( 0 );
-	m_vBackColor = FmVec4(0.5f, 0.5f, 0.5f, 0.0f);
+	//m_vBackColor = FmVec4(0.5f, 0.5f, 0.5f, 0.0f);
 	m_pRenderDrawOp->SetClearColor(m_vBackColor);
 	m_pRenderDrawOp->SetClear(IRenderDrawOp::CLEAR_COLOR_BUFFER | IRenderDrawOp::CLEAR_DEPTH_BUFFER);
 	m_pRenderDrawOp->SetClearDepth(1.0F);
 	m_pRenderDrawOp->SetClearStencil(0);
-	ITexture* texture = CreateTexture("D:\\用户目录\\Documents\\Visual Studio 2013\\Projects\\NexGen\\bin\\res\\tex\\box_5.dds", true);
-	if (texture)
-	{
-		int x = 0;
-		return;
-	}
-
 	// 判断是否需要清楚背景填充色
 
-//	m_pRenderDrawOp->SetClear( IRenderDrawOp::CLEAR_DEPTH_BUFFER );//只需要清除深度
-//	m_pRenderDrawOp->SetClear( IRenderDrawOp::CLEAR_COLOR_BUFFER | IRenderDrawOp::CLEAR_DEPTH_BUFFER | IRenderDrawOp::CLEAR_STENCIL_BUFFER );
- 
-
 	size_t scene_num = m_SceneViews.size();
-	
 	for (size_t i = 0; i <scene_num; i++)
 	{
 		//这里按m_SceneViews的添加顺序来绘制
@@ -1040,7 +1026,6 @@ void Render::BeginFrame(unsigned int back_color)
 		pView->DrawScene();
 		pView->ClearBatchs();
 	}
-
 	m_SceneViews.clear();
 
 	// 恢复原先恢复的FBO 无论如何解决UI都可以正确绘制上去 而且UI直接绘制到backbuffer上面

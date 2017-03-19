@@ -109,7 +109,8 @@ void CSceneView::DrawNormalSceneBefore()
 		else
 		{
 			// 清空一下当前的FBO内容
-			pRenderDrawOp->SetClearColor(m_backcolor);
+
+      pRenderDrawOp->SetClearColor(m_backcolor);
 			pRenderDrawOp->SetClearDepth(1.0F);
 			pRenderDrawOp->SetClear(IRenderDrawOp::CLEAR_COLOR_BUFFER | IRenderDrawOp::CLEAR_DEPTH_BUFFER);
 		}

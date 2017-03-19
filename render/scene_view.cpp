@@ -52,7 +52,7 @@ CSceneView::CSceneView()
 	m_pstrIdent = NULL;
 	m_pRender = NULL;
 
-	m_backcolor = FmVec4(0.0,0.0,0.0,0.0);
+	m_backcolor = FmVec4(0.5f, 0.5f, 0.5f, 0.0f);
 
 	m_pTempFrameRT = NULL;
 
