@@ -41,6 +41,10 @@ public:
 	};
 	
 public:
+  // 添加人物角色
+  virtual bool AddVisualRole(const char* name, const PERSISTID& id) = 0;
+  // 添加地面物体
+  virtual bool AddVisual(const char* name, const PERSISTID& id) = 0;
   /*
 	// 获得加载百分比
 	virtual float GetLoadPercent() = 0;
