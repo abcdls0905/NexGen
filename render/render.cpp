@@ -1014,7 +1014,7 @@ void Render::BeginFrame(unsigned int back_color)
 	// 判断是否需要清楚背景填充色
 
 	size_t scene_num = m_SceneViews.size();
-	for (size_t i = 0; i <scene_num; i++)
+	for (size_t i = 0; i < scene_num; i++)
 	{
 		//这里按m_SceneViews的添加顺序来绘制
 		size_t index = scene_num-1-i;
