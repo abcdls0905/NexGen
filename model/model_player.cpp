@@ -181,3 +181,59 @@ size_t CModelPlayer::GetMaterialCount()
   }
   return pModel->nMaterialCount;
 }
+
+bool CModelPlayer::Draw(const FmPlane* planes, size_t plane_num)
+{
+  if (!IsReady())
+  {
+    return false;
+  }
+  DrawModel(true, 0);
+  return true;
+} 
+
+
+void CModelPlayer::UpdateModel(bool bCull)
+{
+
+}
+
+void CModelPlayer::DrawModel(bool bCull, MatInfo* MatList)
+{
+  model_t* pModel = m_pResModel->GetModelData();
+  if (pModel == NULL)
+  {
+    CORE_TRACE_EX("WARNING: [CModelPlayer::DrawModel] pModel == NULL model name is %s", m_pResModel->GetName());
+    return;
+  }
+  m_mtxCurrentTM = m_mtxWorldTM;
+  for (unsigned int i = 0; i < pModel->nRootNodeCount; ++i)
+  {
+    DrawNode(&pModel->RootNodes[i], bCull, MatList);
+  }
+}
+
+void CModelPlayer::DrawNode(model_node_t* pNode, bool bCull, MatInfo* matinfo)
+{
+  Assert(pNode != NULL);
+  FmMat4 mtxOldWorld = m_mtxCurrentTM;
+  int id;
+  for (unsigned int m = 0; m < pNode->nMaterialCount; m++)
+  {
+    node_material_t* pMat = &pNode->Materials[m];
+    m_pCurMatInfo = &pMat->MatInfo;
+    // 是否有另外指定的材质参数
+    DrawMaterial(pMat, pNode, matinfo);
+  }
+  //draw child nodes
+  for (unsigned int child = 0; child < pNode->nChildNodeCount; child++)
+  {
+    DrawNode(&pNode->ChildNodes[child], bCull, matinfo);
+  }
+  m_mtxCurrentTM = mtxOldWorld;
+}
+
+void CModelPlayer::DrawMaterial(node_material_t* pMat, model_node_t* pNode, MatInfo* matinfo)
+{
+
+}

@@ -64,7 +64,9 @@ public:
 protected:
 	// 为了优化
 	FmVec3 m_vCenter;
-	float m_fRadius;
+  float m_fRadius;
+public:
+  virtual bool Draw(const FmPlane* planes, size_t plane_num) = 0;
 };
 
 #endif // _VISUAL_I_MODEL_PLAYER_H

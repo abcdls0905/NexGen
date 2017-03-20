@@ -165,6 +165,7 @@ model_t* load_md2_model(const char* pszModelName)
   {
     model_node_t* root = &ret->RootNodes[i];
     root->nMaterialCount = 1;
+    root->nChildNodeCount = 0;
     root->Materials = new node_material_t[root->nMaterialCount];
     for (int j = 0; j < root->nMaterialCount; ++j)
     {

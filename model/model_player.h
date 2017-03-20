@@ -519,6 +519,16 @@ public:
   virtual bool IsReady();
   // 材质信息
   virtual size_t GetMaterialCount();
+  // 渲染
+  virtual bool Draw(const FmPlane* planes, size_t plane_num);
+  // 渲染模型
+  void DrawModel(bool bCull, MatInfo* MatList);
+  // 更新模型
+  void UpdateModel(bool bCull);
+  // 画模型节点
+  void DrawNode(model_node_t* pNode, bool bCull, MatInfo* matinfo);
+  // 画模型材质
+  void DrawMaterial(node_material_t* pMat, model_node_t* pNode, MatInfo* matinfo);
 };
 
 #endif
