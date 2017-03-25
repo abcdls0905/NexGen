@@ -53,7 +53,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;USE_FREE_CAMERA;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>../extern/ogles2/include</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
@@ -161,14 +161,70 @@
     <ClInclude Include="..\utils\thread.h" />
     <ClInclude Include="..\utils\tick_timer.h" />
     <ClInclude Include="..\visual\define.h" />
+    <ClInclude Include="..\visual\fastdelegate.h" />
+    <ClInclude Include="..\visual\fm_define.h" />
+    <ClInclude Include="..\visual\fm_header.h" />
     <ClInclude Include="..\visual\header.h" />
+    <ClInclude Include="..\visual\i_action_player.h" />
+    <ClInclude Include="..\visual\i_actor.h" />
+    <ClInclude Include="..\visual\i_actor_callee.h" />
+    <ClInclude Include="..\visual\i_camera.h" />
+    <ClInclude Include="..\visual\i_camera_wrapper.h" />
+    <ClInclude Include="..\visual\i_collision_shape.h" />
+    <ClInclude Include="..\visual\i_constraint.h" />
     <ClInclude Include="..\visual\i_context.h" />
+    <ClInclude Include="..\visual\i_effect_model.h" />
+    <ClInclude Include="..\visual\i_event_manager.h" />
+    <ClInclude Include="..\visual\i_font.h" />
+    <ClInclude Include="..\visual\i_game_client.h" />
+    <ClInclude Include="..\visual\i_game_receiver.h" />
+    <ClInclude Include="..\visual\i_game_sender.h" />
+    <ClInclude Include="..\visual\i_game_sock.h" />
+    <ClInclude Include="..\visual\i_geometry.h" />
+    <ClInclude Include="..\visual\i_gui_hook.h" />
+    <ClInclude Include="..\visual\i_image_access.h" />
+    <ClInclude Include="..\visual\i_input.h" />
+    <ClInclude Include="..\visual\i_light_manager.h" />
+    <ClInclude Include="..\visual\i_light_source.h" />
+    <ClInclude Include="..\visual\i_lines_drawer.h" />
+    <ClInclude Include="..\visual\i_model.h" />
+    <ClInclude Include="..\visual\i_model_player.h" />
+    <ClInclude Include="..\visual\i_model_system.h" />
+    <ClInclude Include="..\visual\i_painter.h" />
+    <ClInclude Include="..\visual\i_particle.h" />
+    <ClInclude Include="..\visual\i_particle_manager.h" />
+    <ClInclude Include="..\visual\i_physics_simulator.h" />
+    <ClInclude Include="..\visual\i_primitive_3d_drawer.h" />
+    <ClInclude Include="..\visual\i_ragdoll.h" />
     <ClInclude Include="..\visual\i_render.h" />
     <ClInclude Include="..\visual\i_resource.h" />
     <ClInclude Include="..\visual\i_res_base.h" />
+    <ClInclude Include="..\visual\i_res_loader.h" />
+    <ClInclude Include="..\visual\i_rigid_body.h" />
+    <ClInclude Include="..\visual\i_scene.h" />
+    <ClInclude Include="..\visual\i_scene_view.h" />
+    <ClInclude Include="..\visual\i_sea_water.h" />
+    <ClInclude Include="..\visual\i_shadow.h" />
+    <ClInclude Include="..\visual\i_shadow_manager.h" />
+    <ClInclude Include="..\visual\i_skin.h" />
+    <ClInclude Include="..\visual\i_sky_box.h" />
+    <ClInclude Include="..\visual\i_solo_stub.h" />
+    <ClInclude Include="..\visual\i_soundsystem.h" />
+    <ClInclude Include="..\visual\i_sun_glow.h" />
+    <ClInclude Include="..\visual\i_terrain.h" />
+    <ClInclude Include="..\visual\i_terrain_brush.h" />
+    <ClInclude Include="..\visual\i_terrain_editor.h" />
     <ClInclude Include="..\visual\i_texture.h" />
+    <ClInclude Include="..\visual\i_time_axis.h" />
+    <ClInclude Include="..\visual\i_ui3d.h" />
+    <ClInclude Include="..\visual\i_ui3d_animation.h" />
+    <ClInclude Include="..\visual\i_ui3d_mesh.h" />
     <ClInclude Include="..\visual\i_vis_base.h" />
+    <ClInclude Include="..\visual\i_weather.h" />
+    <ClInclude Include="..\visual\i_whip_manager.h" />
+    <ClInclude Include="..\visual\i_win_socket.h" />
     <ClInclude Include="..\visual\i_world.h" />
+    <ClInclude Include="..\visual\shader_list.h" />
     <ClInclude Include="..\visual\vis_utils.h" />
     <ClInclude Include="app.h" />
     <ClInclude Include="win_graphdevice.h" />
