@@ -1023,7 +1023,8 @@ void Render::BeginFrame(unsigned int back_color)
 		this->SetContext(pView->GetContext());
 		this->SetSceneView(pView);
 
-		pView->DrawScene();
+    pView->DrawScene();
+    GetRenderDrawOp()->DrawTest();
 		pView->ClearBatchs();
 	}
 	m_SceneViews.clear();

@@ -1,11 +1,3 @@
-//--------------------------------------------------------------------
-// 文件名:		model_player_shader.cpp
-// 内  容:		
-// 说  明:		
-// 创建日期:	2009年5月4日
-// 创建人:		陆利民
-// 版权所有:	苏州蜗牛电子有限公司
-//--------------------------------------------------------------------
 
 #include "model_player.h"
 #include "../visual/i_render.h"
@@ -454,3 +446,117 @@ const char* const_value_name[c_max] =
 	"tex_KeepoutMap",
 	"tex_Shadow",
 };
+
+IShaderProgram* CModelPlayer::SelectShader(const MatInfo* info, 
+	model_node_t* pNode, node_material_t* pMat, bool dynamic_lighting, 
+	bool dynamic_shadow, bool fog_linear, bool fog_exp, bool height_fog, 
+	bool prelight, bool reflect_enable, bool fix_shadow, bool sphere_ambient, 
+	bool point_light, unsigned int model_alpha, bool use_instance,
+	bool camera_light, bool is_blend, bool gamma, bool filter, bool use_clip_plane, 
+	bool onlyzpass, bool onlycolor, bool keepout)
+{
+	
+	const material_info_t* pMatInfo = info->pMatInfo;
+	size_t vs_flags = pMat->nVertexDefine;
+	bool texture_ani = false;//(pMat->pFrameDiffuseTM != NULL);
+	bool normal_map = (pMatInfo->BumpMap.pFileName != NULL)
+		&& ((pMat->nVertexDefine & VERTEX_TANGENT_FLAG) != 0);
+
+	bool blend_quality = pMatInfo->bBlendQuality && (model_alpha == 255);
+
+	vs_flags |= size_t(texture_ani) << MODEL_VS_TEXTUREANI;
+	vs_flags |= size_t(normal_map) << MODEL_VS_NORMALMAP;
+	vs_flags |= size_t(pMatInfo->bDisappear) << MODEL_VS_DISAPPEAR;
+	vs_flags |= 0x1 << MODEL_VS_VIEWVECTOR;
+	vs_flags |= size_t(gamma) << MODEL_VS_GAMMA;
+	vs_flags |= size_t(use_clip_plane) << MODEL_VS_CLIPPLANE;
+	vs_flags |= size_t(filter) << MODEL_VS_FILTER;
+	vs_flags |= size_t(keepout) << MODEL_VS_KEEPOUT;
+	vs_flags |= size_t(dynamic_shadow) << MODEL_VS_SHADOWMAP;
+
+	vs_flags |= size_t(fog_exp) << MODEL_VS_FOGEXP;
+	vs_flags |= size_t(fog_linear) << MODEL_VS_FOGLINEAR;
+	vs_flags |= size_t(height_fog) << MODEL_VS_HEIGHT_FOG;
+	bool filter_texture_ani = info->pMat->nMaterialInfoEx & MATERIAL_FILTER_UV_ANI;
+	vs_flags |= size_t(filter_texture_ani) << MODEL_VS_FILTERTEXTUREANI;
+
+	size_t ps_flags = 0;
+	bool diffuse_map = (pMatInfo->DiffuseMap.pFileName != NULL);
+	bool specular_map = (pMatInfo->SpecularMap.pFileName != NULL)
+		|| (pMatInfo->SpecularLevelMap.pFileName != NULL);
+	bool emissive_map = (pMatInfo->EmissiveMap.pFileName != NULL);
+	bool skeleton_ani = (pMat->nVertexDefine & VERTEX_SKELETON_FLAG) != 0;
+
+	vs_flags |= size_t(diffuse_map) << MODEL_VS_DIFFUSEMAP;
+	vs_flags |= size_t(specular_map) << MODEL_VS_SPECULARMAP;
+
+	ps_flags |= size_t(use_clip_plane) << MODEL_PS_CLIPPLANE;
+	ps_flags |= size_t(diffuse_map) << MODEL_PS_DIFFUSEMAP;
+	ps_flags |= size_t(normal_map) << MODEL_PS_NORMALMAP;
+	ps_flags |= size_t(pMatInfo->bSpecularEnable) << MODEL_PS_SPECULAR;
+	ps_flags |= size_t(specular_map) << MODEL_PS_SPECULARMAP;
+	ps_flags |= size_t(pMatInfo->bEmissiveEnable) << MODEL_PS_EMISSIVE;
+	ps_flags |= size_t(emissive_map) << MODEL_PS_EMISSIVEMAP;
+	ps_flags |= size_t(skeleton_ani) << MODEL_PS_SKELETON;
+	ps_flags |= size_t(dynamic_lighting) << MODEL_PS_DYNAMICLIGHTING;
+	ps_flags |= size_t(dynamic_shadow) << MODEL_PS_SHADOWMAP;
+//	ps_flags |= size_t(prelight) << MODEL_PS_PRELIGHT;
+	ps_flags |= size_t(fix_shadow) << MODEL_PS_FIXSHADOW;
+	ps_flags |= size_t(reflect_enable) << MODEL_PS_REFLECTION;
+	ps_flags |= size_t(sphere_ambient) << MODEL_PS_SPHEREAMBIENT;
+	ps_flags |= size_t(pMatInfo->bRimLight) << MODEL_PS_FALLOFF;
+	ps_flags |= size_t(fog_exp) << MODEL_PS_FOGEXP;
+	ps_flags |= size_t(fog_linear) << MODEL_PS_FOGLINEAR;
+
+	bool alpha_test = blend_quality || pMatInfo->bAlphaTest;
+	ps_flags |= size_t(alpha_test) << MODEL_PS_ALPHATEST;
+	ps_flags |= size_t(is_blend && blend_quality) << MODEL_PS_GREATERQUAL;
+	
+//	ps_flags |= size_t(pMatInfo->bAlphaTestGreaterQual) << MODEL_PS_GREATERQUAL;
+	ps_flags |= size_t(pMatInfo->bSkinEffect) << MODEL_PS_SKINEFFECT;
+	ps_flags |= size_t(pMatInfo->bDisappear) << MODEL_PS_DISAPPEAR;
+	ps_flags |= size_t(pMatInfo->bOpacityEnable) << MODEL_PS_OPACITY;
+//	ps_flags |= size_t(pMatInfo->bVolumeTexture) << MODEL_PS_VOLUMETEXTURE;
+	//只要是半透明，都打开这个宏
+	ps_flags |= size_t(is_blend) << MODEL_PS_OPACITY;
+	
+	ps_flags |= size_t(onlyzpass) << MODEL_PS_ONLYZPASS;
+
+	ps_flags |= size_t(onlycolor) << MODEL_PS_ONLYCOLOR;
+
+	ps_flags |= size_t(point_light) << MODEL_PS_POINTLIGHT;
+
+	ps_flags |= size_t(filter) << MODEL_PS_FILTER;
+
+	ps_flags |= size_t(keepout) << MODEL_PS_KEEPOUT;
+
+	ps_flags |= size_t(height_fog) << MODEL_PS_HEIGHT_FOG;
+
+	if (pMatInfo->bOpacityEnable || (m_nColor != 0xFFFFFFFF))
+	{
+		ps_flags |= 0x1 << MODEL_PS_APPENDCOLOR;
+	}
+
+	// 在淡入淡出时不使用模型的顶点色
+	
+	if (model_alpha == 255)
+	{
+		bool use_diffuse = (pMat->nVertexDefine & VERTEX_COLOR_FLAG) != 0;
+
+		ps_flags |= size_t(use_diffuse) << MODEL_PS_DIFFUSE;
+	}
+
+	if (!dynamic_lighting)
+	{
+		bool light_map = true;//(pMatInfo->LightMap.pFileName != NULL);
+		
+		ps_flags |= size_t(light_map) << MODEL_PS_LIGHTMAP;
+	}
+
+	ps_flags |= size_t(pMatInfo->bBlendEnhance) << MODEL_PS_BLEND_ENHANCE;
+
+	IVertexShader* pVS = s_VSList.GetShader(vs_flags);
+	IPixelShader* pPS = s_PSList.GetShader(ps_flags);
+
+	return ShaderManager::Inst().GetShader(vs_flags,ps_flags,pVS, pPS, pMat, pNode, const_value_name, c_max);
+}

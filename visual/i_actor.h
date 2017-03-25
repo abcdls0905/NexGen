@@ -9,6 +9,8 @@
 class IActor: public IVisBase
 {
 public:
+  // 取得连接对象ID
+  virtual PERSISTID GetLinkObject(const char* name) = 0;
   /*
 	// 通过配置文件加载组合模型
 	virtual bool CreateFromIni(const char* pFileName) = 0;

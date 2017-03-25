@@ -815,6 +815,10 @@ public:
 	virtual void SetVB(fm_uint vb) = 0;
 	// set ib
 	virtual void SetIB(fm_uint ib) = 0;
+
+  virtual void DrawTest() = 0;
+
+  virtual void EnableCullFace(bool enable) = 0;
 };
 
 

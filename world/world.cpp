@@ -86,6 +86,8 @@ bool World::CreateDevice(bool multithreading)
 		CORE_TRACE("(World::CreateDevice)render not found");
 		return false;
 	}
+  m_pRender->SetDeviceSize(m_nWidth, m_nHeight);
+
 	if (!m_pRender->CreateDevice(multithreading))
 	{
 		return false;

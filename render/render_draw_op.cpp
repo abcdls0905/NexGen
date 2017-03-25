@@ -376,3 +376,133 @@ unsigned int CRenderDrawOp::VertexDataTypeToGLVertexDataType(IRenderDrawOp::VERT
 	return VertexDataType;
 }
 
+static const float g_vertexColors[] = {
+  1.0f, 1.0f, 0.0f, 1.0f,
+  1.0f, 1.0f, 1.0f, 1.0f,
+  1.0f, 0.0f, 0.0f, 1.0f,
+  1.0f, 0.0f, 1.0f, 1.0f,
+};
+
+static const float g_vertexTexcoord[] = {
+  0.f, 0.f,    
+  1.f, 0.f,    
+  0.0f, 1.f,    
+  1.0f, 1.f,    
+};
+
+static const unsigned short g_indices[] = {
+  0, 1, 2, 1, 2, 3,
+};
+
+static const float g_vertexPositions[] = {
+  -0.5f, -0.5f,   0.0f,
+  0.5f, -0.5f,   0.0f,
+  -0.5f,  0.5f,   0.0f,
+  0.5f,  0.5f,   0.0f,
+};
+
+GLuint progHandle = 0;
+GLuint verShader = 0;
+GLuint fraShader = 0;
+
+GLuint vBuffer = 0;
+GLuint iBuffer = 0;
+
+char* verFile = "E:\\SVNPro\\NexGen\\bin\\pro\\eff\\vertex.glsl";
+char* fraFile = "E:\\SVNPro\\NexGen\\bin\\pro\\eff\\fragment.glsl";
+
+char* ReadFileData(char* file)
+{
+  FILE* fp = fopen(file, "r");
+  if (!fp)
+    return nullptr;
+  int len = 0;
+  fseek(fp, 0, SEEK_END);
+  len = ftell(fp);
+  fseek(fp, 0, SEEK_SET);
+  char* data = new char[len+1];
+  memset(data, 0, len+1);
+  fread(data, sizeof(char), len, fp);
+  fclose(fp);
+  return data;
+}
+
+void CRenderDrawOp::DrawTest()
+{
+  return;
+  if (!progHandle)
+  {
+    char* verData = ReadFileData(verFile);
+    char* fraData = ReadFileData(fraFile);
+
+    verShader = glCreateShader(GL_VERTEX_SHADER);
+    fraShader = glCreateShader(GL_FRAGMENT_SHADER);
+
+    glShaderSource(verShader, 1, &verData, 0);
+    glShaderSource(fraShader, 1, &fraData, 0);
+
+    glCompileShader ( verShader );
+    glCompileShader ( fraShader );
+    int compiled = 0;
+    glGetShaderiv ( verShader, GL_COMPILE_STATUS, &compiled );
+    compiled = 0;
+    glGetShaderiv ( fraShader, GL_COMPILE_STATUS, &compiled );
+
+    progHandle = glCreateProgram ( );
+
+    glAttachShader ( progHandle, verShader );
+    glAttachShader ( progHandle, fraShader );
+
+    glLinkProgram ( progHandle );
+    int linked = 0;
+    glGetProgramiv ( progHandle, GL_LINK_STATUS, &linked );
+
+    glDeleteShader(verShader);
+    glDeleteShader(fraShader);
+
+    if ( !linked ) 
+    {
+      GLint infoLen = 0;
+      glGetProgramiv ( progHandle, GL_INFO_LOG_LENGTH, &infoLen );
+      if ( infoLen > 1 )
+      {
+        char infoLog[128];
+        glGetProgramInfoLog ( progHandle, infoLen, NULL, infoLog );
+        return;
+      }
+    }
+
+    delete []verData;
+    delete []fraData;
+
+    glGenBuffers(1, &vBuffer);
+    glBindBuffer(GL_ARRAY_BUFFER, vBuffer);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertexPositions), g_vertexPositions, GL_STATIC_DRAW);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+    glGenBuffers(1, &iBuffer);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, iBuffer);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(g_indices), g_indices, GL_STATIC_DRAW);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+    return;
+  }
+
+  EnableCullFace(false);
+  glUseProgram( progHandle );
+
+  int loc = glGetAttribLocation(progHandle, "position");
+  glBindBuffer(GL_ARRAY_BUFFER, vBuffer);
+  glEnableVertexAttribArray( loc );
+  glVertexAttribPointer( loc, 3, GL_FLOAT, false, 0, 0 );
+  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, iBuffer);
+  glDrawElements( GL_TRIANGLES, 3 * 2, GL_UNSIGNED_SHORT, 0 );
+
+  glBindBuffer(GL_ARRAY_BUFFER, 0);
+  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+  glUseProgram( 0 );
+}
+
+void CRenderDrawOp::EnableCullFace(bool enable)
+{
+  glDisable(GL_CULL_FACE);
+}

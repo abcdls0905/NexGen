@@ -160,16 +160,20 @@ model_t* load_md2_model(const char* pszModelName)
   ret->nRootNodeCount = 1;
   ret->RootNodes = (model_node_t*)CORE_ALLOC(
     sizeof(model_node_t) * ret->nRootNodeCount);
+  memset(ret->RootNodes, 0, sizeof(model_node_t) * ret->nRootNodeCount);
 
   for (int i = 0; i < ret->nRootNodeCount; ++i)
   {
     model_node_t* root = &ret->RootNodes[i];
+    root->nModelInfo= MODEL_POSITION_INFO + MODEL_NORMAL_INFO;
     root->nMaterialCount = 1;
     root->nChildNodeCount = 0;
     root->Materials = new node_material_t[root->nMaterialCount];
+    memset(root->Materials, 0, sizeof(node_material_t) * root->nMaterialCount);
     for (int j = 0; j < root->nMaterialCount; ++j)
     {
       node_material_t* material = &root->Materials[j];
+      material->nMaterialInfo = MATERIAL_DIFFUSE_MAP_INFO;
       init_material_value(&material->MatInfo);
       //¹Ø¼ü¹¹Ôì
       material->pGPUIB;
@@ -180,42 +184,82 @@ model_t* load_md2_model(const char* pszModelName)
       //build vb
       FmVec3* startFrame = &vertexs[0];
       int trianglesCount = header.numTris;
-      material->vexts = new float[trianglesCount * 18];
-      //float* uvs = new float[trianglesCount * 6];
+      int vertexContent = 8;
+      int count = vertexContent*3;
+      material->nSingleVertexSize = vertexContent*sizeof(float);
+      material->SingleVB.nStride = material->nSingleVertexSize;
+      material->SingleVB.nCount = trianglesCount * 3;
+      material->nVertexCount = trianglesCount * 3;
+      //material->SingleVB.pVertices = new unsigned char[header.numTris*count];
+      create_vertex_data(&material->SingleVB, material->SingleVB.nStride, material->nVertexCount);
       for (int k = 0; k < header.numTris; ++k)
       {
         Md2Triangle& triIdx = triangles[k];
-        material->vexts[k*18+0] = startFrame[triIdx.vertexIndices[0]].x;
-        material->vexts[k*18+1] = startFrame[triIdx.vertexIndices[0]].y;
-        material->vexts[k*18+2] = startFrame[triIdx.vertexIndices[0]].z;
-        material->vexts[k*18+3] = startFrame[triIdx.vertexIndices[1]].x;
-        material->vexts[k*18+4] = startFrame[triIdx.vertexIndices[1]].y;
-        material->vexts[k*18+5] = startFrame[triIdx.vertexIndices[1]].z;
-        material->vexts[k*18+6] = startFrame[triIdx.vertexIndices[2]].x;
-        material->vexts[k*18+7] = startFrame[triIdx.vertexIndices[2]].y;
-        material->vexts[k*18+8] = startFrame[triIdx.vertexIndices[2]].z;
-        material->vexts[k*18+9] = texCoords[triIdx.stIndices[0]].s;
-        material->vexts[k*18+10] = texCoords[triIdx.stIndices[0]].t;
-        material->vexts[k*18+11] = texCoords[triIdx.stIndices[1]].s;
-        material->vexts[k*18+12] = texCoords[triIdx.stIndices[1]].s;
-        material->vexts[k*18+13] = texCoords[triIdx.stIndices[2]].s;
-        material->vexts[k*18+14] = texCoords[triIdx.stIndices[2]].s;
-        float p1[3] = {material->vexts[k*15+0], material->vexts[k*15+1], material->vexts[k*15+2]};
-        float p2[3] = {material->vexts[k*15+3], material->vexts[k*15+4], material->vexts[k*15+5]};
-        float p3[3] = {material->vexts[k*15+6], material->vexts[k*15+7], material->vexts[k*15+8]};
+        float v1x = startFrame[triIdx.vertexIndices[0]].x;
+        float v1y = startFrame[triIdx.vertexIndices[0]].y;
+        float v1z = startFrame[triIdx.vertexIndices[0]].z;
+        float v2x = startFrame[triIdx.vertexIndices[1]].x;
+        float v2y = startFrame[triIdx.vertexIndices[1]].y;
+        float v2z = startFrame[triIdx.vertexIndices[1]].z;
+        float v3x = startFrame[triIdx.vertexIndices[2]].x;
+        float v3y = startFrame[triIdx.vertexIndices[2]].y;
+        float v3z = startFrame[triIdx.vertexIndices[2]].z;
+
+        float p1[3] = {v1x, v1y, v1z};
+        float p2[3] = {v2x, v2y, v2z};
+        float p3[3] = {v3x, v3y, v3z};
+
         FmVec3 normal = CalculateNormal(p1, p2, p3);
-        material->vexts[k*18+15] = normal.x;
-        material->vexts[k*18+16] = normal.y;
-        material->vexts[k*18+17] = normal.z;
+
+        float n1x = normal.x;
+        float n1y = normal.y;
+        float n1z = normal.z;
+        float n2x = normal.x;
+        float n2y = normal.y;
+        float n2z = normal.z;
+        float n3x = normal.x;
+        float n3y = normal.y;
+        float n3z = normal.z;
+
+        float uv1s = texCoords[triIdx.stIndices[0]].s;
+        float uv1t = texCoords[triIdx.stIndices[0]].t;
+        float uv2s = texCoords[triIdx.stIndices[1]].s;
+        float uv2t = texCoords[triIdx.stIndices[1]].t;
+        float uv3s = texCoords[triIdx.stIndices[2]].s;
+        float uv3t = texCoords[triIdx.stIndices[2]].t;
+
+        material->SingleVB.pVertices[k*count+0] = v1x;
+        material->SingleVB.pVertices[k*count+1] = v1y;
+        material->SingleVB.pVertices[k*count+2] = v1z;
+        material->SingleVB.pVertices[k*count+3] = n1x;
+        material->SingleVB.pVertices[k*count+4] = n1y;
+        material->SingleVB.pVertices[k*count+5] = n1z;
+        material->SingleVB.pVertices[k*count+6] = uv1s;
+        material->SingleVB.pVertices[k*count+7] = uv1t;
+        material->SingleVB.pVertices[k*count+8] = v2x;
+        material->SingleVB.pVertices[k*count+9] = v2y;
+        material->SingleVB.pVertices[k*count+10] = v2z;
+        material->SingleVB.pVertices[k*count+11] = n2x;
+        material->SingleVB.pVertices[k*count+12] = n2y;
+        material->SingleVB.pVertices[k*count+13] = n2z;
+        material->SingleVB.pVertices[k*count+14] = uv2s;
+        material->SingleVB.pVertices[k*count+15] = uv2t;
+        material->SingleVB.pVertices[k*count+16] = v3x;
+        material->SingleVB.pVertices[k*count+17] = v3y;
+        material->SingleVB.pVertices[k*count+18] = v3z;
+        material->SingleVB.pVertices[k*count+19] = n3x;
+        material->SingleVB.pVertices[k*count+20] = n3y;
+        material->SingleVB.pVertices[k*count+21] = n3z;
+        material->SingleVB.pVertices[k*count+22] = uv3s;
+        material->SingleVB.pVertices[k*count+23] = uv3t;
+
       }
-      unsigned short* indices = new unsigned short[header.numTris * 3];
+      material->nIndicesCount = header.numTris * 3;
+      material->indices = new unsigned short[header.numTris * 3];
       for (int k = 0; k < header.numTris * 3; ++k)
       {
-        indices[k] = k;
+        material->indices[k] = k;
       }
-      int ib_size = header.numTris * 3 * sizeof(unsigned short);
-      //material->pGPUIB = g_pRender->CreateStaticIB(indices, ib_size);
-      //material->pSingleGPUVB = g_pRender->CreateStaticVB(material->vexts, (unsigned int)header.numTris * 18);
     }
   }
 

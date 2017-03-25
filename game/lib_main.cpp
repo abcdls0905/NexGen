@@ -8,4 +8,9 @@ void lib_main_game()
 {
   REG_ENTITY(Game);
   REG_ENTITY(GameControl);
+#ifdef _WIN32
+  REG_ENTITY(WinFreeCamera);
+#endif
+  REG_ENTITY(Camera3rd);
+  REG_ENTITY(CameraControl);
 }

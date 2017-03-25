@@ -27,6 +27,8 @@ public:
 
   // 创建可视对象
   virtual PERSISTID Create(const char* name) = 0;
+  // 获得摄像机对象
+  virtual PERSISTID GetCameraID() = 0;
   /*
   // 渲染器参数
   virtual IRenderContext* GetContext() const = 0;

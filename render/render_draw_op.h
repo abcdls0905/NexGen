@@ -278,6 +278,10 @@ public:
 	virtual void SetIB(fm_uint ib);
 
 	void Print();
+
+  virtual void DrawTest();
+
+  virtual void EnableCullFace(bool enable);
 private:
     //提供一次draw的数据内容
 	void  CaptureDrawCall();

@@ -20,6 +20,8 @@ Game::~Game()
 bool Game::Init(const IVarList& args)
 {
   g_core = GetCore();
+  g_core->CreateEntity("CameraControl");
+  g_gamecontrol = (GameControl*)g_core->CreateEntity("GameControl");
   g_render = (IRender*)GetCore()->GetInterface("Render");
   g_world = (IWorld*)GetCore()->LookupEntity("World");
   g_scene = (IScene*)g_core->CreateEntity("Scene");
@@ -32,7 +34,6 @@ bool Game::Init(const IVarList& args)
   g_world->SetMainSceneID(g_scene->GetID());
   g_core->AddMsgProc(this, WM_LBUTTONDOWN);
   g_core->AddMsgProc(this, WM_KEYDOWN);
-  g_gamecontrol = (GameControl*)g_core->CreateEntity("GameControl");
 	return true;
 }
 

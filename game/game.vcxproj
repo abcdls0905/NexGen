@@ -50,6 +50,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalIncludeDirectories>.\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -77,15 +78,24 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="camera\camera_3rd.cpp" />
+    <ClCompile Include="camera\camera_control.cpp" />
+    <ClCompile Include="camera\free_camera.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="game_control .cpp" />
     <ClCompile Include="global.cpp" />
+    <ClCompile Include="helper.cpp" />
     <ClCompile Include="lib_main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="camera\camera_3rd.h" />
+    <ClInclude Include="camera\camera_base.h" />
+    <ClInclude Include="camera\camera_control.h" />
+    <ClInclude Include="camera\free_camera.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="game_control.h" />
     <ClInclude Include="global.h" />
+    <ClInclude Include="helper.h" />
     <ClInclude Include="util\macro_util.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

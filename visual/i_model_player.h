@@ -16,7 +16,7 @@ struct vertex_data_t
 #endif
 	unsigned int nStride; // 单个顶点的数据长度
 	size_t nCount; // 顶点总数据
-	unsigned char* pVertices;
+	float* pVertices;
 #ifdef CPU_COMPUTE_BONE
 	unsigned char* pDynamicVertices;
 #endif
@@ -26,7 +26,7 @@ struct vertex_data_t
 inline void create_vertex_data(vertex_data_t* pData, unsigned int stride, 
 	size_t count)
 {
-	pData->pVertices = (unsigned char*)CORE_ALLOC(stride * count);
+	pData->pVertices = (float*)CORE_ALLOC(stride * count);
 	pData->nStride = stride;
 	pData->nCount = count;
 }
@@ -43,7 +43,7 @@ inline void release_vertex_data(vertex_data_t* pData)
 }
 
 // 获得指定索引的顶点数据
-inline unsigned char* get_vertex_by_index(const vertex_data_t* pData, 
+inline float* get_vertex_by_index(const vertex_data_t* pData, 
 	size_t index)
 {
 	Assert(index < pData->nCount);

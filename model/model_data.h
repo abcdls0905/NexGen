@@ -288,12 +288,18 @@ struct node_material_t
 	IStaticIB* pGPUIB;					  //顶点缓冲
 	IStaticVB* pSingleGPUVB;
 	material_info_t MatInfo;      // 材质数据
-  float* vexts;                 //顶点数据
+  unsigned short* indices;
+  unsigned int nIndicesCount;
+  unsigned int nSingleVertexSize;
+  unsigned int nMaterialInfo;
+  unsigned int nMaterialInfoEx;
+  unsigned int nVertexDefine;
 };
 
 // 模型节点
 struct model_node_t
 {
+  FXNODE_TYPE nType;
 	unsigned int nNameLen;
 	char* pszName;
 	location_t* pLocation;
@@ -303,7 +309,8 @@ struct model_node_t
 	node_material_t* Materials;
 	unsigned int nChildNodeCount;
 	model_node_t* ChildNodes;
-	int nIndex;
+  unsigned int nModelInfo;
+  int nIndex;
 
 };
 

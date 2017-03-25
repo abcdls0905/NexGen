@@ -436,7 +436,8 @@ public:
     float fOffsetV;
     char strName[1];
   };
-
+private:
+  ShaderUserConstValue m_ShaderUserConstValue;
 private:
   MatInfo* m_MatList;
   IRender* m_pRender;
@@ -529,6 +530,24 @@ public:
   void DrawNode(model_node_t* pNode, bool bCull, MatInfo* matinfo);
   // 画模型材质
   void DrawMaterial(node_material_t* pMat, model_node_t* pNode, MatInfo* matinfo);
+  // 创建顶点和索引缓冲
+  bool CreateVBIB(node_material_t* pMat, model_node_t* pNode);
+
+  void AddDrawMaterialSolidBatch(node_material_t* pMat, model_node_t* pNode, const FmVec4* bone_matrices, MatInfo& info);
+  static void DrawMaterialSolidBatch(void* pdata);
+  void DrawMaterialSolid(const MatInfo* info, bool onlyzpass = false, bool onlycolor = false);
+  // 创建顶点定义
+  bool CreateVDecl(node_material_t* pMat, model_node_t* pNode, bool lod);
+
+  IShaderProgram* SelectShader(const MatInfo* info, model_node_t* pNode, 
+    node_material_t* pMat, bool dynamic_lighting, bool dynamic_shadow, 
+    bool fog_linear, bool fog_exp, bool height_fog, bool prelight, bool reflect_enable, 
+    bool fix_shadow, bool sphere_ambient, bool point_light, 
+    unsigned int model_alpha, bool use_instance, bool camera_light, 
+    bool is_blend, bool gamma, bool filter, bool use_clip_plane, bool onlyzpass = false, bool onlycolor = false, bool keepout = false);
+
+  //给SHADER设置常量
+  void SetShaderConstValue(IShaderProgram* pShader, const MatInfo* info);
 };
 
 #endif

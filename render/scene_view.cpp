@@ -391,7 +391,7 @@ void CSceneView::CopyTempDepthRT()
 
 void CSceneView::DrawScene()
 { 
-	TestErr("DrawSceneBefore");
+	//TestErr("DrawSceneBefore");
 	DrawSceneBefore();
 
 	switch(m_nSceneViewType)
@@ -421,7 +421,7 @@ void CSceneView::DrawScene()
 	}
 
 	DrawSceneAfter();
-	TestErr("DrawSceneAfter");
+	//TestErr("DrawSceneAfter");
 }
 
 // 渲染器相关参数

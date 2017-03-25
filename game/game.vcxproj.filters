@@ -8,6 +8,16 @@
     <ClCompile Include="game.cpp" />
     <ClCompile Include="global.cpp" />
     <ClCompile Include="game_control .cpp" />
+    <ClCompile Include="camera\camera_3rd.cpp">
+      <Filter>camera</Filter>
+    </ClCompile>
+    <ClCompile Include="camera\camera_control.cpp">
+      <Filter>camera</Filter>
+    </ClCompile>
+    <ClCompile Include="camera\free_camera.cpp">
+      <Filter>camera</Filter>
+    </ClCompile>
+    <ClCompile Include="helper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game.h" />
@@ -16,10 +26,26 @@
     <ClInclude Include="util\macro_util.h">
       <Filter>util</Filter>
     </ClInclude>
+    <ClInclude Include="camera\camera_3rd.h">
+      <Filter>camera</Filter>
+    </ClInclude>
+    <ClInclude Include="camera\camera_base.h">
+      <Filter>camera</Filter>
+    </ClInclude>
+    <ClInclude Include="camera\camera_control.h">
+      <Filter>camera</Filter>
+    </ClInclude>
+    <ClInclude Include="camera\free_camera.h">
+      <Filter>camera</Filter>
+    </ClInclude>
+    <ClInclude Include="helper.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="util">
       <UniqueIdentifier>{f8789fec-2e2d-46fc-a1ef-fb09bd08da17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="camera">
+      <UniqueIdentifier>{41ccad7d-e6dd-4e20-9c99-f7cbcec40e00}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
