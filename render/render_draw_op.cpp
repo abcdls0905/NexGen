@@ -408,8 +408,8 @@ GLuint fraShader = 0;
 GLuint vBuffer = 0;
 GLuint iBuffer = 0;
 
-char* verFile = "E:\\SVNPro\\NexGen\\bin\\pro\\eff\\vertex.glsl";
-char* fraFile = "E:\\SVNPro\\NexGen\\bin\\pro\\eff\\fragment.glsl";
+char* verFile = "E:\\SVNPro\\NexGen\\bin\\pro\\eff\\model.vsh";
+char* fraFile = "E:\\SVNPro\\NexGen\\bin\\pro\\eff\\model.fsh";
 
 char* ReadFileData(char* file)
 {
@@ -429,7 +429,6 @@ char* ReadFileData(char* file)
 
 void CRenderDrawOp::DrawTest()
 {
-  return;
   if (!progHandle)
   {
     char* verData = ReadFileData(verFile);
@@ -504,5 +503,8 @@ void CRenderDrawOp::DrawTest()
 
 void CRenderDrawOp::EnableCullFace(bool enable)
 {
-  glDisable(GL_CULL_FACE);
+  if (enable)
+    glEnable(GL_CULL_FACE);
+  else
+    glDisable(GL_CULL_FACE);
 }

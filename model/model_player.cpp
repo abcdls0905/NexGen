@@ -370,6 +370,8 @@ void CModelPlayer::DrawMaterialSolid(const MatInfo* info, bool onlyzpass /*= fal
   else
     pRenderStateOp->EnableCullFace(true);
 
+  ITexture* pTexLight = NULL;
+  SetModelTexture(info, pShader, pMat, pTexLight);
   SetShaderConstValue(pShader, info);
 
   if(info->pMatInfo->bBlendQuality)
@@ -381,6 +383,7 @@ void CModelPlayer::DrawMaterialSolid(const MatInfo* info, bool onlyzpass /*= fal
   int ib_count = pMat->nIndicesCount;
   pRenderDrawOp->EnableCullFace(false);
   pRenderDrawOp->DrawIndex(IRenderDrawOp::DRAW_TRIANGLES,ib_count,IRenderDrawOp::VERTEX_INDEX_UNSIGNED_SHORT,&((fm_short*)0)[0]);
+  pRenderDrawOp->EnableCullFace(true);
   if(pMatInfo->bDoubleSide)
   {
     //pRenderStateOp->EnableCullFace(true);
@@ -403,7 +406,7 @@ bool CModelPlayer::CreateVDecl(node_material_t* pMat, model_node_t* pNode, bool 
   {
     int POS = vf.GetVF(ModelVF::VERTEX);
     pRenderDrawOp->EnableVertexAttribArray(POS);
-    pRenderDrawOp->SetVertexAttribPointer(POS,3,IRenderDrawOp::VERTEX_DATA_FLOAT,stride, (fm_void*)offset);
+    pRenderDrawOp->SetVertexAttribPointer(POS,3,IRenderDrawOp::VERTEX_DATA_FLOAT, stride, (fm_void*)offset);
     offset += sizeof(float)*3;
   }
   //NORAML
@@ -549,4 +552,29 @@ void CModelPlayer::SetShaderConstValue(IShaderProgram* pShader, const MatInfo* i
   ShaderManager::Inst().SetShaderValue4f(c_HeightFogColor, height_fog_color); 
 
   m_ShaderUserConstValue.UploadGPU();
+}
+
+void CModelPlayer::SetModelTexture(const MatInfo* info, IShaderProgram* pShader, const node_material_t* pMat, ITexture* pTexLight /*= 0*/)
+{
+  const material_info_t* pMatInfo = info->pMatInfo;
+
+  int texlevel = 0;
+  // Âþ·´ÉäÌùÍ¼
+  if (pMat->nMaterialInfo & MATERIAL_DIFFUSE_MAP_INFO)
+  {
+    ITexture* pTexDiffuse = pMatInfo->DiffuseMap.pTex;
+    if (pTexDiffuse)
+    {
+      ITextureSampler* pTexSampler = pTexDiffuse->GetCanUseShaderTex()->GetTextureSampler();
+      SetTexture(tex_Diffuse, pTexDiffuse->GetCanUseShaderTex()->GetTexture());
+      if(pMat->MatInfo.bSamplerClamp)
+      {
+        pTexSampler->SetTextureUVWrapMode( ITextureSampler::TWM_CLAMP_TO_EDGE,  ITextureSampler::TWM_CLAMP_TO_EDGE);
+      }
+      else
+      {
+        pTexSampler->SetTextureUVWrapMode( ITextureSampler::TWM_REPEAT,  ITextureSampler::TWM_REPEAT);
+      }
+    }
+  }
 }

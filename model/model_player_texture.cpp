@@ -350,7 +350,7 @@ bool load_model_texture(model_t* pModel, const char* tex_paths, bool async)
 		for (unsigned int i = 0; i < pModel->nRootNodeCount; ++i)
 		{
       //ls test
-			//load_model_node_texture(&pModel->RootNodes[i], pModel->pszTexBase, tex_paths, async);
+			load_model_node_texture(&pModel->RootNodes[i], pModel->pszTexBase, tex_paths, async);
 		}
 	}
 

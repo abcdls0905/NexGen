@@ -548,6 +548,13 @@ public:
 
   //给SHADER设置常量
   void SetShaderConstValue(IShaderProgram* pShader, const MatInfo* info);
+  //把设置贴图的代码抽离出来公用
+  void SetModelTexture(const MatInfo* info, IShaderProgram* pShader, const node_material_t* pMat, ITexture* pTexLight = 0);
+
+  inline void SetTexture(int name, fm_uint tex)
+  {
+    ShaderManager::Inst().SetTexture2D(name, tex);
+  }
 };
 
 #endif

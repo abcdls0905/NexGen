@@ -357,8 +357,8 @@ typedef struct
 class Md2Vertex
 {
 public:
-  char position[3];
-  char normalIndex;
+  unsigned char position[3];
+  unsigned char normalIndex;
 };
 
 class Md2Frame
@@ -402,7 +402,7 @@ static void LOG_ERROR(const char* format, ...)
 
 
 // 加载模型实例
-model_t* load_model(const char* pszModelName, const char* type = 0);
+model_t* load_model(const char* pszModelName, char* tex = 0);
 // 卸载模型实例
 void unload_model(model_t* pModel);
 

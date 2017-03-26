@@ -102,7 +102,21 @@ FmVec3 CalculateNormal(float *p1, float *p2, float *p3)
   return FmVec3(result[0] / length, result[1] / length, result[2] / length);
 }
 
-model_t* load_md2_model(const char* pszModelName)
+void WriteVertex(FmVec3* vertexs, int count)
+{
+  FILE* fp = fopen("vertex.txt", "wt");
+  for (int i = 0; i < count; i++)
+  {
+    float data[3] = {vertexs[i].x, vertexs[i].y, vertexs[i].z};
+    fwrite(&vertexs[i].x, sizeof(float), 1, fp);
+    fwrite(&vertexs[i].y, sizeof(float), 1, fp);
+    fwrite(&vertexs[i].z, sizeof(float), 1, fp);
+    fwrite("\n", sizeof("\n"), 1, fp);
+  }
+  fclose(fp);
+}
+
+model_t* load_md2_model(const char* pszModelName, char* tex)
 {
   //CORE_LOG_DEVELOPER("[START] LoadVertexAniModel(%s)\n", pszModelName);
   FILE* pFile = core_file::fopen(pszModelName, "rb");
@@ -129,7 +143,7 @@ model_t* load_md2_model(const char* pszModelName)
   //load vertexs
   int numVertices = header.numXYZ;
   FmVec3* vertexs = new FmVec3[header.numXYZ * header.numFrames];
-  unsigned char * frameBuffer=new unsigned char[header.framesize];
+  unsigned char * frameBuffer = new unsigned char[header.framesize];
   for(int i=0; i<header.numFrames; ++i)
   {
     fseek(pFile, header.offsetFrames+i*header.framesize, SEEK_SET);
@@ -138,25 +152,48 @@ model_t* load_md2_model(const char* pszModelName)
     for(int j=0; j<header.numXYZ; ++j)
     {
       vertexs[i*numVertices+j].x= float(framePtr->scale[0] * framePtr->vertices[j].position[0] + framePtr->translation[0]);
-      vertexs[i*numVertices+j].y= float(framePtr->scale[2] * framePtr->vertices[j].position[2] + framePtr->translation[2]);
-      vertexs[i*numVertices+j].z=-float(framePtr->scale[1] * framePtr->vertices[j].position[1] + framePtr->translation[1]);
-      //vertexs[i*numVertices+j]/=64;
+      vertexs[i*numVertices+j].z= float(framePtr->scale[2] * framePtr->vertices[j].position[2] + framePtr->translation[2]);
+      vertexs[i*numVertices+j].y=-float(framePtr->scale[1] * framePtr->vertices[j].position[1] + framePtr->translation[1]);
+      vertexs[i*numVertices+j]/=10;
     }
   }
 
   //load textures
   Md2TexCoord* texCoords = new Md2TexCoord[header.numST];
   fseek(pFile, header.offsetST, SEEK_SET);
-  fread(texCoords, header.numST, sizeof(Md2TexCoord), pFile);
+  fread(texCoords, sizeof(Md2TexCoord), header.numST, pFile);
 
   //load triangles
   int numTriangles=header.numTris;
   Md2Triangle* triangles=new Md2Triangle[numTriangles];
   fseek(pFile, header.offsetTris, SEEK_SET);
-  fread(triangles, numTriangles, sizeof(Md2Triangle), pFile);
+  fread(triangles, sizeof(Md2Triangle), numTriangles, pFile);
 
   //build VertexBuffer and IndexBuffer
 
+  if (ret->pszTexBase == NULL)
+  {
+    // 获得模型所在的文件路径
+    const char* path_end = pszModelName;
+    const char* s = strrchr(pszModelName, '\\');
+    if (s)
+    {
+      path_end = s + 1;
+    }
+    else
+    {
+      s = strrchr(pszModelName, '/');
+
+      if (s)
+      {
+        path_end = s + 1;
+      }
+    }
+    size_t size = path_end - pszModelName;
+    ret->pszTexBase = (char*)CORE_ALLOC(size + 1);
+    memcpy(ret->pszTexBase, pszModelName, size);
+    ret->pszTexBase[size] = 0;
+  }
   ret->nRootNodeCount = 1;
   ret->RootNodes = (model_node_t*)CORE_ALLOC(
     sizeof(model_node_t) * ret->nRootNodeCount);
@@ -175,10 +212,12 @@ model_t* load_md2_model(const char* pszModelName)
       node_material_t* material = &root->Materials[j];
       material->nMaterialInfo = MATERIAL_DIFFUSE_MAP_INFO;
       init_material_value(&material->MatInfo);
+      {
+        //设置贴图数据
+        material->MatInfo.DiffuseMap.pFileName = "tris.pvr";
+        material->MatInfo.DiffuseMap.nFileNameLen = strlen("tris.pvr");
+      }
       //关键构造
-      material->pGPUIB;
-      material->pSingleGPUVB;
-      material->MatInfo;
 
       //只取第一帧静态数据
       //build vb
@@ -190,7 +229,6 @@ model_t* load_md2_model(const char* pszModelName)
       material->SingleVB.nStride = material->nSingleVertexSize;
       material->SingleVB.nCount = trianglesCount * 3;
       material->nVertexCount = trianglesCount * 3;
-      //material->SingleVB.pVertices = new unsigned char[header.numTris*count];
       create_vertex_data(&material->SingleVB, material->SingleVB.nStride, material->nVertexCount);
       for (int k = 0; k < header.numTris; ++k)
       {
@@ -270,14 +308,14 @@ model_t* load_md2_model(const char* pszModelName)
   return ret;
 }
 
-model_t* load_model(const char* pszModelName, const char* type)
+model_t* load_model(const char* pszModelName, char* tex)
 {
   Assert(pszModelName != NULL);
   if (strstr(pszModelName, ".md2"))
   {
-    return load_md2_model(pszModelName);
+    return load_md2_model(pszModelName, tex);
   }
-  else if (strstr(type, ".fbx"))
+  else if (strstr(pszModelName, ".fbx"))
   {
 
   }
