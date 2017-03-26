@@ -1,6 +1,9 @@
 
+uniform sampler2D tex_Diffuse;
+varying mediump vec2 texUV;
+
 void main ()
 {
-  gl_FragColor = vec4(0.0, 0.0, 0.5, 1.0);
+  mediump vec4 crTexDiffuse = texture2D(tex_Diffuse, texUV.xy);
+  gl_FragColor = crTexDiffuse;
 }
-
