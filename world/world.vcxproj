@@ -76,6 +76,7 @@
   <ItemGroup>
     <ClInclude Include="actor.h" />
     <ClInclude Include="camera.h" />
+    <ClInclude Include="pssm.h" />
     <ClInclude Include="render_tex.h" />
     <ClInclude Include="scene.h" />
     <ClInclude Include="world.h" />
@@ -83,6 +84,7 @@
   <ItemGroup>
     <ClCompile Include="actor.cpp" />
     <ClCompile Include="camera.cpp" />
+    <ClCompile Include="pssm.cpp" />
     <ClCompile Include="render_tex.cpp" />
     <ClCompile Include="scene.cpp" />
     <ClCompile Include="world.cpp" />

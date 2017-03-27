@@ -9,6 +9,7 @@
     <ClInclude Include="scene.h" />
     <ClInclude Include="camera.h" />
     <ClInclude Include="render_tex.h" />
+    <ClInclude Include="pssm.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="world.cpp" />
@@ -17,5 +18,6 @@
     <ClCompile Include="scene.cpp" />
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="render_tex.cpp" />
+    <ClCompile Include="pssm.cpp" />
   </ItemGroup>
 </Project>
