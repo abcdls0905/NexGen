@@ -29,6 +29,9 @@ public:
   virtual PERSISTID Create(const char* name) = 0;
   // 获得摄像机对象
   virtual PERSISTID GetCameraID() = 0;
+  // 是否要开启动态阴影
+  virtual void SetEnableDynamicShadow(bool value) = 0;
+  virtual bool GetEnableDynamicShadow() const = 0;
   /*
   // 渲染器参数
   virtual IRenderContext* GetContext() const = 0;

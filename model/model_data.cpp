@@ -214,8 +214,9 @@ model_t* load_md2_model(const char* pszModelName, char* tex)
       init_material_value(&material->MatInfo);
       {
         //设置贴图数据
-        material->MatInfo.DiffuseMap.pFileName = "tris.pvr";
-        material->MatInfo.DiffuseMap.nFileNameLen = strlen("tris.pvr");
+        char* texFile = "tris.pvr";
+        material->MatInfo.DiffuseMap.pFileName = texFile;
+        material->MatInfo.DiffuseMap.nFileNameLen = strlen(texFile);
       }
       //关键构造
 
@@ -259,12 +260,12 @@ model_t* load_md2_model(const char* pszModelName, char* tex)
         float n3y = normal.y;
         float n3z = normal.z;
 
-        float uv1s = texCoords[triIdx.stIndices[0]].s;
-        float uv1t = texCoords[triIdx.stIndices[0]].t;
-        float uv2s = texCoords[triIdx.stIndices[1]].s;
-        float uv2t = texCoords[triIdx.stIndices[1]].t;
-        float uv3s = texCoords[triIdx.stIndices[2]].s;
-        float uv3t = texCoords[triIdx.stIndices[2]].t;
+        float uv1s = (float)texCoords[triIdx.stIndices[0]].s/header.skinwidth;
+        float uv1t = (float)texCoords[triIdx.stIndices[0]].t/header.skinheight;
+        float uv2s = (float)texCoords[triIdx.stIndices[1]].s/header.skinwidth;
+        float uv2t = (float)texCoords[triIdx.stIndices[1]].t/header.skinheight;
+        float uv3s = (float)texCoords[triIdx.stIndices[2]].s/header.skinwidth;
+        float uv3t = (float)texCoords[triIdx.stIndices[2]].t/header.skinheight;
 
         material->SingleVB.pVertices[k*count+0] = v1x;
         material->SingleVB.pVertices[k*count+1] = v1y;
