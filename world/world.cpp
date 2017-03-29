@@ -27,6 +27,7 @@ World::~World()
 
 bool World::Init(const IVarList& args)
 {
+  GetCore()->AddExecute(this);
 	return true;
 }
 
@@ -37,6 +38,15 @@ bool World::Shut()
 
 void World::Execute(float seconds)
 {
+  if (NULL == m_pRender)
+  {
+    return;
+  }
+  // ¸üÐÂ³¡¾°
+  if (m_pMainScene)
+  {
+    m_pMainScene->Update(seconds);
+  }
 
 }
 
