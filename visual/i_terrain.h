@@ -45,6 +45,16 @@ public:
   virtual bool AddVisualRole(const char* name, const PERSISTID& id) = 0;
   // 添加地面物体
   virtual bool AddVisual(const char* name, const PERSISTID& id) = 0;
+  // 天空对象
+  virtual void SetSkyID(const PERSISTID& value) = 0;
+  virtual PERSISTID GetSkyID() const = 0;
+  // 需要投射影子
+  virtual void SetCastShadow(bool value) = 0;
+  virtual bool GetCastShadow() const = 0;
+
+  // 需要接受投射影子
+  virtual void SetReceiveShadow(bool value) = 0;
+  virtual bool GetReceiveShadow() const = 0;
   /*
 	// 获得加载百分比
 	virtual float GetLoadPercent() = 0;

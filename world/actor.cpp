@@ -22,6 +22,7 @@ Actor::Actor()
   m_pModelSystem = NULL;
   m_pModelPlayer = NULL;
   m_bVisible = true;
+  FmMatrixIdentity(&m_mtxWorld);
 }
 
 Actor::~Actor()
@@ -67,6 +68,7 @@ void Actor::Realize()
     return;
   if (!m_pModelPlayer)
     return;
+  m_pModelPlayer->SetWorldMatrix(m_mtxWorld);
   // 获取当前视图模式
   ISceneView::SCENE_VIEW_TYPE scene_view_type = m_pRender->GetSceneView()->GetSceneViewType();
   switch(scene_view_type)
@@ -109,4 +111,45 @@ void Actor::RealizeReflect()
 PERSISTID Actor::GetLinkObject(const char* name)
 {
   return PERSISTID();
+}
+
+bool Actor::SetPosition(float x, float y, float z)
+{
+  Assert(m_pModelSystem != NULL);
+
+  m_mtxWorld._41 = x;
+  m_mtxWorld._42 = y;
+  m_mtxWorld._43 = z;
+  return true;
+}
+
+FmVec3 Actor::GetPosition() const
+{
+  return FmVec3(m_mtxWorld._41, m_mtxWorld._42, m_mtxWorld._43);
+}
+
+bool Actor::SetAngle(float x, float y, float z)
+{
+  VisUtil_SetMatrixAngle(&m_mtxWorld, x, y, z);
+  return true;
+}
+
+FmVec3 Actor::GetAngle() const
+{
+  FmVec3 angle;
+  VisUtil_GetMatrixAngle(&angle, &m_mtxWorld);
+  return angle;
+}
+
+void Actor::RealizeShadowMap()
+{
+  UpdateMatrix(NULL);
+
+  IRenderContext* pContext = m_pRender->GetContext();
+  m_pModelPlayer->DrawShadowMap(pContext->GetClipPlanes(), pContext->GetClipPlaneAmount());
+}
+
+void Actor::UpdateMatrix(IVisBase* pVisBase)
+{
+
 }

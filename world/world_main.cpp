@@ -11,4 +11,5 @@ void lib_main_world()
   REG_ENTITY(Scene);
   REG_ENTITY(Camera);
   REG_ENTITY(PSSM);
+  REG_ENTITY(SkyBox);
 }

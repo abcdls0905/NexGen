@@ -444,8 +444,22 @@ void CRenderDrawOp::DrawTest()
     glCompileShader ( fraShader );
     int compiled = 0;
     glGetShaderiv ( verShader, GL_COMPILE_STATUS, &compiled );
+    if (!compiled)
+    {
+      char log[128];
+      int len = 0;
+      glGetShaderInfoLog(fraShader, 128, &len, log);
+      len = 0;
+    }
     compiled = 0;
     glGetShaderiv ( fraShader, GL_COMPILE_STATUS, &compiled );
+    if (!compiled)
+    {
+      char log[128];
+      int len = 0;
+      glGetShaderInfoLog(fraShader, 128, &len, log);
+      len = 0;
+    }
 
     progHandle = glCreateProgram ( );
 

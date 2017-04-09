@@ -67,6 +67,8 @@ protected:
   float m_fRadius;
 public:
   virtual bool Draw(const FmPlane* planes, size_t plane_num) = 0;
+  virtual void SetWorldMatrix(const FmMat4& mat) = 0;
+  virtual bool DrawShadowMap(const FmPlane* planes, size_t plane_num) = 0;
 };
 
 #endif // _VISUAL_I_MODEL_PLAYER_H

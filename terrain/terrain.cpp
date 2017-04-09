@@ -14,6 +14,8 @@ Terrain::Terrain()
 {
   m_pRender = NULL;
   m_pContext = NULL;
+  m_bCastShadow = 0;
+  m_bReceiveShadow = 0;
 }
 
 Terrain::~Terrain()
@@ -35,6 +37,8 @@ bool Terrain::Init(const IVarList& args)
 
 bool Terrain::Shut()
 {
+  // 删除天空对象
+  GetCore()->DeleteEntity(m_SkyID);
   SAFE_RELEASE(m_pRender);
   return true;
 }
@@ -65,6 +69,15 @@ void Terrain::Realize()
     IVisBase* pVisBase = m_Visuals[i];
     pVisBase->Realize();
   }
+  // 画完地表再画天空，这样可以减少像素填充
+  if (!m_SkyID.IsNull())
+  {
+    IVisBase* pSky = (IVisBase*)GetCore()->GetEntity(m_SkyID);
+    if (pSky)
+    {
+      pSky->Realize();
+    }
+  }
 }
 
 bool Terrain::AddVisualRole(const char* name, const PERSISTID& id)
@@ -92,4 +105,23 @@ int Terrain::AddVisBase(const char* name, IVisBase* pVisBase, bool is_role, floa
   Assert(pVisBase != NULL);
   m_Visuals.push_back(pVisBase);
   return RESULT_SUCCESS;
+}
+
+void Terrain::SetSkyID(const PERSISTID& value)
+{
+  m_SkyID = value;
+}
+
+PERSISTID Terrain::GetSkyID() const
+{
+  return m_SkyID;
+}
+
+void Terrain::RealizeShadowMap()
+{
+  int render_size = m_Visuals.size();
+  for (size_t i = 0; i < render_size; ++i)
+  {
+    m_Visuals[i]->RealizeShadowMap();
+  }
 }

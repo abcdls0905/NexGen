@@ -14,6 +14,9 @@ class Terrain: public ITerrain
 {
 protected:
   //IRenderContext* m_pContext;
+  bool m_bCastShadow;
+  bool m_bReceiveShadow;
+  PERSISTID m_SkyID;
   IRender* m_pRender;
   TArrayPod<IVisBase*, 1> m_Visuals;
 public:
@@ -35,6 +38,18 @@ public:
   // 添加地面物体
   virtual int AddVisBase(const char* name, IVisBase* pVisBase, 
     bool is_role, float clip_radius);
+  // 天空对象
+  virtual void SetSkyID(const PERSISTID& value);
+  virtual PERSISTID GetSkyID() const;
+  virtual void RealizeShadowMap();
+
+  // 需要投射影子
+  virtual void SetCastShadow(bool value) { m_bCastShadow = value; }
+  virtual bool GetCastShadow() const { return m_bCastShadow; }
+
+  // 需要接受投射影子
+  virtual void SetReceiveShadow(bool value)  {m_bReceiveShadow = value; }
+  virtual bool GetReceiveShadow() const { return m_bReceiveShadow; }
 };
 
 #endif

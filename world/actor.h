@@ -18,6 +18,7 @@ class IIniFile;
 class Actor : public IActor
 {
 private:
+  FmMat4 m_mtxWorld;
   IRender* m_pRender;
   core_string m_ConfigFile;
   IModelSystem* m_pModelSystem;
@@ -34,7 +35,14 @@ public:
   virtual void RealizeNormal();
   virtual void RealizeReflect();
   virtual PERSISTID GetLinkObject(const char* name);
-
+  // Œª÷√
+  virtual bool SetPosition(float x, float y, float z);
+  virtual FmVec3 GetPosition() const;
+  // ∑ΩœÚ
+  virtual bool SetAngle(float x, float y, float z);
+  virtual FmVec3 GetAngle() const;
+  virtual void RealizeShadowMap();
+  void UpdateMatrix(IVisBase* pVisBase);
 };
 
 #endif

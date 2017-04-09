@@ -79,6 +79,7 @@
     <ClInclude Include="pssm.h" />
     <ClInclude Include="render_tex.h" />
     <ClInclude Include="scene.h" />
+    <ClInclude Include="sky_box.h" />
     <ClInclude Include="world.h" />
   </ItemGroup>
   <ItemGroup>
@@ -87,6 +88,7 @@
     <ClCompile Include="pssm.cpp" />
     <ClCompile Include="render_tex.cpp" />
     <ClCompile Include="scene.cpp" />
+    <ClCompile Include="sky_box.cpp" />
     <ClCompile Include="world.cpp" />
     <ClCompile Include="world_main.cpp" />
   </ItemGroup>

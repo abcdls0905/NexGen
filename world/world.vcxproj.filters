@@ -10,6 +10,7 @@
     <ClInclude Include="camera.h" />
     <ClInclude Include="render_tex.h" />
     <ClInclude Include="pssm.h" />
+    <ClInclude Include="sky_box.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="world.cpp" />
@@ -19,5 +20,6 @@
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="render_tex.cpp" />
     <ClCompile Include="pssm.cpp" />
+    <ClCompile Include="sky_box.cpp" />
   </ItemGroup>
 </Project>

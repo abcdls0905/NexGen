@@ -11,6 +11,12 @@ class IActor: public IVisBase
 public:
   // 取得连接对象ID
   virtual PERSISTID GetLinkObject(const char* name) = 0;
+  // 位置
+  virtual bool SetPosition(float x, float y, float z) = 0;
+  virtual FmVec3 GetPosition() const = 0;
+  // 方向
+  virtual bool SetAngle(float x, float y, float z) = 0;
+  virtual FmVec3 GetAngle() const = 0;
   /*
 	// 通过配置文件加载组合模型
 	virtual bool CreateFromIni(const char* pFileName) = 0;
