@@ -83,6 +83,7 @@
     <ClCompile Include="camera\free_camera.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="game_control .cpp" />
+    <ClCompile Include="game_scene.cpp" />
     <ClCompile Include="global.cpp" />
     <ClCompile Include="helper.cpp" />
     <ClCompile Include="lib_main.cpp" />
@@ -94,6 +95,8 @@
     <ClInclude Include="camera\free_camera.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="game_control.h" />
+    <ClInclude Include="game_scene.h" />
+    <ClInclude Include="game_util.h" />
     <ClInclude Include="global.h" />
     <ClInclude Include="helper.h" />
     <ClInclude Include="util\macro_util.h" />

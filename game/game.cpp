@@ -44,5 +44,5 @@ bool Game::Shut()
 
 bool Game::MsgProc(unsigned int msg, size_t param1, size_t param2, int& result)
 {
-	return true;
+	return false;
 }

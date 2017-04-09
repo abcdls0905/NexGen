@@ -18,6 +18,7 @@
       <Filter>camera</Filter>
     </ClCompile>
     <ClCompile Include="helper.cpp" />
+    <ClCompile Include="game_scene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game.h" />
@@ -39,6 +40,8 @@
       <Filter>camera</Filter>
     </ClInclude>
     <ClInclude Include="helper.h" />
+    <ClInclude Include="game_scene.h" />
+    <ClInclude Include="game_util.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="util">
