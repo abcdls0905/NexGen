@@ -469,6 +469,7 @@ void CModelPlayer::SetShaderConstValue(IShaderProgram* pShader, const MatInfo* i
     FmVec4 light_diffuse = pContext->GetVector4(IRenderContext::V_LIGHT_DIFFUSE);
     light_ambient.w = pContext->GetFloat(IRenderContext::F_REFLECT_FACTOR);
     ShaderManager::Inst().SetShaderValue4f(c_LightAmbient, light_ambient);
+    light_diffuse = FmVec4(2.0f, 2.0f, 2.0f, 1.0f);
     ShaderManager::Inst().SetShaderValue4f(c_LightDiffuse, light_diffuse);
   }
 
@@ -538,6 +539,7 @@ void CModelPlayer::SetShaderConstValue(IShaderProgram* pShader, const MatInfo* i
 
   FmVec4 height_fog_color = pContext->GetVector4(IRenderContext::V_HEIGHTFOG_CURRENT);
 
+  light_dir = FmVec4(0.76, 0.64, 0.12, 0.0);
   ShaderManager::Inst().SetShaderValue3f(c_vLightDir, light_dir.x, light_dir.y, light_dir.z);
   ShaderManager::Inst().SetShaderValueMat4(c_mtxViewInverse, mtxViewInverse);
 
@@ -577,4 +579,17 @@ void CModelPlayer::SetModelTexture(const MatInfo* info, IShaderProgram* pShader,
       }
     }
   }
+}
+
+void CModelPlayer::SetWorldMatrix(const FmMat4& mat)
+{
+  m_mtxWorldTM = mat;
+}
+
+bool CModelPlayer::DrawShadowMap(const FmPlane* planes, size_t plane_num)
+{
+  if (!IsReady())
+    return false;
+
+  return true;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
 }

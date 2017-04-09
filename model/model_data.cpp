@@ -214,7 +214,7 @@ model_t* load_md2_model(const char* pszModelName, char* tex)
       init_material_value(&material->MatInfo);
       {
         //ÉèÖÃÌùÍ¼Êý¾Ý
-        char* texFile = "tris.pvr";
+        char* texFile = "evil.jpg";
         material->MatInfo.DiffuseMap.pFileName = texFile;
         material->MatInfo.DiffuseMap.nFileNameLen = strlen(texFile);
       }

@@ -555,6 +555,9 @@ public:
   {
     ShaderManager::Inst().SetTexture2D(name, tex);
   }
+  // ÊÀ½ç¾ØÕó
+  virtual void SetWorldMatrix(const FmMat4& mat);
+  virtual bool DrawShadowMap(const FmPlane* planes, size_t plane_num);
 };
 
 #endif
