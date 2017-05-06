@@ -6,6 +6,7 @@
 #include "../visual/i_scene.h"
 #include "../visual/i_world.h"
 #include "../visual/i_terrain.h"
+#include "../gui/gui.h"
 #include "global.h"
 #include "game.h"
 #include "game_control.h"
@@ -34,6 +35,8 @@ bool Game::Init(const IVarList& args)
   g_world->SetMainSceneID(g_scene->GetID());
   g_core->AddMsgProc(this, WM_LBUTTONDOWN);
   g_core->AddMsgProc(this, WM_KEYDOWN);
+  Gui* pGui = (Gui*)GetCore()->CreateEntity("Gui");
+  g_world->SetMainGuiID(pGui->GetID());
 	return true;
 }
 

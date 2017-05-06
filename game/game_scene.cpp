@@ -59,6 +59,11 @@ bool SceneManager::load_terrain(const char* pstrfile,IScene* pScene, bool can_lo
   pTerrain->SetCastShadow(true);
   pScene->AddObject( pTerrain->GetID() , 30 );
   pScene->SetEnableDynamicShadow(true);
+  FmVec4 light_diffuse = FmVec4(2.0f, 2.0f, 2.0f, 1.0f);
+  IRenderContext* pContext = pTerrain->GetContext();
+  pContext->SetVector4(IRenderContext::V_LIGHT_DIFFUSE, light_diffuse);
+  FmVec4 light_dir = FmVec4(0.76, 0.64, 0.12, 0.0);
+  pContext->SetVector4(IRenderContext::V_LIGHT_DIRECTION, light_dir);
   pIni->Release();
 }
 

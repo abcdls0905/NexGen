@@ -5,6 +5,7 @@
 #include "util/macro_util.h"
 #include "../visual/i_actor.h"
 #include "../world/actor.h"
+#include "../world/model.h"
 #include "../visual/i_scene.h"
 #include "../visual/i_camera.h"
 #include "../game/camera/camera_control.h"
@@ -89,7 +90,8 @@ bool GameControl::MsgProc(unsigned int msg, size_t param1, size_t param2, int& r
   return false;
 }
 
-Actor* actor = NULL;
+Model* actor = NULL;
+Model* actor1 = NULL;
 
 bool GameControl::MsgKeyDown(size_t param1, size_t param2)
 {
@@ -119,22 +121,32 @@ bool GameControl::MsgKeyDown(size_t param1, size_t param2)
     {
       if (actor)
       {
-        CameraControl* pCameraControl = (CameraControl*)g_core->LookupEntity("CameraControl");
-        if (pCameraControl)
-        {
-          CameraBase* pCamera = pCameraControl->GetActiveCamera();
-          pCamera->GetCamera()->SetBindID(actor->GetID());
-          pCamera->SetEnable(true);
-        }
         break;
       }
-      IActor* iActor = (IActor*)g_pCore->CreateEntity("Actor");
-      actor = (Actor*) iActor;
+      IModel* iActor = (IModel*)g_pCore->CreateEntity("Model");
+      actor = (Model*) iActor;
       actor->SetContext(g_terrain->GetContext());
       actor->Load("md2\\拿刀的古代士兵\\tris.md2", "");
       actor->SetPosition(0, 0, 0);
-      actor->SetCastShadow(true);
+      //actor->SetAngle(0, 0, FM_PI/2);
+      //actor->SetCastShadow(true);
+      actor->m_pModelPlayer->SetReceiveShadow(true);
       g_terrain->AddVisualRole("test_player", actor->GetID());
+      break;
+    }
+  case 'C':
+    {
+      if (actor1)
+        break;
+      IModel* iActor = (IModel*)g_pCore->CreateEntity("Actor");
+      actor1 = (Model*) iActor;
+      actor1->SetContext(g_terrain->GetContext());
+      actor1->Load("md2\\拿刀的古代士兵\\tris.md2", "");
+      actor1->SetPosition(3, 0, 0);
+      actor1->SetAngle(0, 0, FM_PI/2);
+      actor1->SetCastShadow(true);
+      //actor1->m_pModelPlayer->SetReceiveShadow(true);
+      g_terrain->AddVisualRole("test_player1", actor1->GetID());
       break;
     }
   case 'M':
@@ -196,6 +208,11 @@ bool GameControl::MsgKeyDown(size_t param1, size_t param2)
         actor->SetAngle(angle.x, angle.y + 0.3f, angle.z);
       }
       break;
+    }
+  case 'O':
+    {
+      IRenderContext* pContent = g_render->GetContext();
+      g_render->SaveTextureToFile(pContent->GetDynamicShadowRT(), "test.png");
     }
   }
 #endif
