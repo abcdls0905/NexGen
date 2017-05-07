@@ -10,6 +10,10 @@
 #include "../visual/i_terrain.h"
 #include "../visual/i_render.h"
 
+#include "../algorithm/fractal.h"
+
+class IModel;
+
 class Terrain: public ITerrain
 {
 protected:
@@ -18,7 +22,10 @@ protected:
   bool m_bReceiveShadow;
   PERSISTID m_SkyID;
   IRender* m_pRender;
+  Fractal* m_pFractal;
   TArrayPod<IVisBase*, 1> m_Visuals;
+
+  IModel* m_pFractalTerrain;
 public:
   Terrain();
   virtual ~Terrain();
@@ -50,6 +57,8 @@ public:
   // 需要接受投射影子
   virtual void SetReceiveShadow(bool value)  {m_bReceiveShadow = value; }
   virtual bool GetReceiveShadow() const { return m_bReceiveShadow; }
+  virtual void InitFractalTerrain(int w);
+  virtual void GenerateFractalTerrain();
 };
 
 #endif

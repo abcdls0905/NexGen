@@ -16,6 +16,7 @@ Terrain::Terrain()
   m_pContext = NULL;
   m_bCastShadow = 0;
   m_bReceiveShadow = 0;
+  m_pFractal = Fractal::NewInstance();
 }
 
 Terrain::~Terrain()
@@ -122,6 +123,17 @@ void Terrain::RealizeShadowMap()
   int render_size = m_Visuals.size();
   for (size_t i = 0; i < render_size; ++i)
   {
+    IVisBase* vis = m_Visuals[i];
+    if (!vis->GetCastShadow())
+      continue;
     m_Visuals[i]->RealizeShadowMap();
   }
+}
+
+void Terrain::InitFractalTerrain(int w)
+{
+  if (!m_pFractal)
+    return;
+  m_pFractal->SetSize(w);
+  m_pFractal->SetCornerValue(1.0, 0.0, 0.5, 0.0, 1.0);
 }

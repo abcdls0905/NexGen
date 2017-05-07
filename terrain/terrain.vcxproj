@@ -74,6 +74,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="generateterrain.cpp" />
     <ClCompile Include="terrain.cpp" />
     <ClCompile Include="terrain_main.cpp" />
   </ItemGroup>
