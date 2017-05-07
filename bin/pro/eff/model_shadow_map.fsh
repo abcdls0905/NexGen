@@ -18,15 +18,6 @@ uniform mediump float c_fAlphaRefValue;
 
 void main (void)
 {
-#ifdef ALPHATEST
-	mediump float alpha = texture2D(tex_Diffuse, oTex0.xy).w;
-
-	if(alpha - c_fAlphaRefValue <0.0)
-	{
-		discard;
-	}
-#endif
-
 	//gl_FragColor = EncodeFloatRGB(oDepth / 1024.0);
 	gl_FragColor = vec4(0.5, 1.0, 1.0, 1.0);
 }

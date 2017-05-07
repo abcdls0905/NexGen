@@ -61,7 +61,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>../debug/;../extern/ogles2/lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>core.lib;math.lib;render.lib;world.lib;terrain.lib;model.lib;game.lib;libEGL.lib;libGLESv2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>core.lib;math.lib;algorithm.lib;render.lib;world.lib;terrain.lib;model.lib;game.lib;gui.lib;libEGL.lib;libGLESv2.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>../bin/$(ProjectName).exe</OutputFile>
       <IgnoreSpecificDefaultLibraries>LIBCMTD.lib</IgnoreSpecificDefaultLibraries>
     </Link>

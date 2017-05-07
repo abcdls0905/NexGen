@@ -491,7 +491,8 @@ bool Render::UpdateDynamicVB(IDynamicVB* pVBuffer, unsigned int offset,
 	this->GetPerformance()->dLoadVBData +=size/1024.0f;
 #endif	
 
-	GLenum res = glGetError();
+  //GLenum res = glGetError();
+  GLenum res = GL_NO_ERROR;
 
 	if (res != GL_NO_ERROR)
 	{
@@ -820,7 +821,8 @@ bool Render::SaveTextureToFile(IShaderTex* pShaderTex, const char* file_name)
 {
 	Assert(pShaderTex != NULL);
 	Assert(file_name != NULL);
-
+  fm_uint tex = pShaderTex->GetTexture();
+  SaveTexToFile(file_name, tex, pShaderTex->GetWidth(), pShaderTex->GetHeight());
 	return false;
 }
 

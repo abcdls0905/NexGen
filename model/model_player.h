@@ -533,6 +533,14 @@ public:
   // 创建顶点和索引缓冲
   bool CreateVBIB(node_material_t* pMat, model_node_t* pNode);
 
+  // 需要投射影子
+  virtual void SetCastShadow(bool value) { m_bCastShadow = value; }
+  virtual bool GetCastShadow() const { return m_bCastShadow; }
+
+  // 需要接受投射影子
+  virtual void SetReceiveShadow(bool value) { m_bReceiveShadow = value; }
+  virtual bool GetReceiveShadow() const { return m_bReceiveShadow; }
+
   void AddDrawMaterialSolidBatch(node_material_t* pMat, model_node_t* pNode, const FmVec4* bone_matrices, MatInfo& info);
   static void DrawMaterialSolidBatch(void* pdata);
   void DrawMaterialSolid(const MatInfo* info, bool onlyzpass = false, bool onlycolor = false);
@@ -558,6 +566,13 @@ public:
   // 世界矩阵
   virtual void SetWorldMatrix(const FmMat4& mat);
   virtual bool DrawShadowMap(const FmPlane* planes, size_t plane_num);
+  // 画节点的阴影图
+  void DrawNodeShadowMap(model_node_t* pNode, bool bCull);
+  void AddDrawMaterialShadowMapBatch(node_material_t* pMat, material_info_t* pMatInfo, model_node_t* pNode);
+  static void DrawMaterialShadowMapBatch(void* pdata);
+  // 画材质阴影图
+  void DrawMaterialShadowMap(const MatInfo* info);
+  IShaderProgram* SelectShadowMapShader(const MatInfo* info, node_material_t* pMat, model_node_t* pNode);
 };
 
 #endif

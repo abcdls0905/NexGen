@@ -164,6 +164,7 @@ bool GameControl::MsgKeyDown(size_t param1, size_t param2)
     }
   case 'V':
     {
+      g_terrain->InitFractalTerrain(5);
       break;
     }
   case 'L':

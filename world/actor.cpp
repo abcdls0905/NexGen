@@ -22,6 +22,8 @@ Actor::Actor()
   m_pModelSystem = NULL;
   m_pModelPlayer = NULL;
   m_bVisible = true;
+  m_bCastShadow= false;
+  m_bReceiveShadow= false;
   FmMatrixIdentity(&m_mtxWorld);
 }
 

@@ -408,8 +408,8 @@ GLuint fraShader = 0;
 GLuint vBuffer = 0;
 GLuint iBuffer = 0;
 
-char* verFile = "E:\\SVNPro\\NexGen\\bin\\pro\\eff\\model.vsh";
-char* fraFile = "E:\\SVNPro\\NexGen\\bin\\pro\\eff\\model.fsh";
+char* verFile = "E:\\SVNPro\\NexGen\\bin\\pro\\eff\\vertex.vsh";
+char* fraFile = "E:\\SVNPro\\NexGen\\bin\\pro\\eff\\fragment.fsh";
 
 char* ReadFileData(char* file)
 {

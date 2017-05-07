@@ -11,6 +11,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "render", "render\render.vcx
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "main", "main\main.vcxproj", "{3EA1AF74-AC18-4A81-AB32-C57162B9C225}"
 	ProjectSection(ProjectDependencies) = postProject
+		{8C4EEA14-4B04-4FEC-8A06-F89E3D1C0CBB} = {8C4EEA14-4B04-4FEC-8A06-F89E3D1C0CBB}
 		{CF396D52-7EEA-42C2-AF4C-34A2862D0714} = {CF396D52-7EEA-42C2-AF4C-34A2862D0714}
 		{5B28EE81-070B-49C2-A78D-3E606B3ACA15} = {5B28EE81-070B-49C2-A78D-3E606B3ACA15}
 		{CBB94B9B-88C4-447E-97F0-56E02448167D} = {CBB94B9B-88C4-447E-97F0-56E02448167D}
@@ -30,6 +31,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "terrain", "terrain\terrain.vcxproj", "{CBB94B9B-88C4-447E-97F0-56E02448167D}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "gui", "gui\gui.vcxproj", "{76FBC400-9044-478F-BAC6-14D9F92AC441}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "algorithm", "algorithm\algorithm.vcxproj", "{8C4EEA14-4B04-4FEC-8A06-F89E3D1C0CBB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -86,6 +91,18 @@ Global
 		{CBB94B9B-88C4-447E-97F0-56E02448167D}.Perf_Debug|Win32.Build.0 = Debug|Win32
 		{CBB94B9B-88C4-447E-97F0-56E02448167D}.Release|Win32.ActiveCfg = Release|Win32
 		{CBB94B9B-88C4-447E-97F0-56E02448167D}.Release|Win32.Build.0 = Release|Win32
+		{76FBC400-9044-478F-BAC6-14D9F92AC441}.Debug|Win32.ActiveCfg = Debug|Win32
+		{76FBC400-9044-478F-BAC6-14D9F92AC441}.Debug|Win32.Build.0 = Debug|Win32
+		{76FBC400-9044-478F-BAC6-14D9F92AC441}.Perf_Debug|Win32.ActiveCfg = Perf_Debug|Win32
+		{76FBC400-9044-478F-BAC6-14D9F92AC441}.Perf_Debug|Win32.Build.0 = Perf_Debug|Win32
+		{76FBC400-9044-478F-BAC6-14D9F92AC441}.Release|Win32.ActiveCfg = Release|Win32
+		{76FBC400-9044-478F-BAC6-14D9F92AC441}.Release|Win32.Build.0 = Release|Win32
+		{8C4EEA14-4B04-4FEC-8A06-F89E3D1C0CBB}.Debug|Win32.ActiveCfg = Debug|Win32
+		{8C4EEA14-4B04-4FEC-8A06-F89E3D1C0CBB}.Debug|Win32.Build.0 = Debug|Win32
+		{8C4EEA14-4B04-4FEC-8A06-F89E3D1C0CBB}.Perf_Debug|Win32.ActiveCfg = Debug|Win32
+		{8C4EEA14-4B04-4FEC-8A06-F89E3D1C0CBB}.Perf_Debug|Win32.Build.0 = Debug|Win32
+		{8C4EEA14-4B04-4FEC-8A06-F89E3D1C0CBB}.Release|Win32.ActiveCfg = Release|Win32
+		{8C4EEA14-4B04-4FEC-8A06-F89E3D1C0CBB}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

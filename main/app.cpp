@@ -39,6 +39,7 @@ extern void lib_main_render();
 extern void lib_main_game();
 extern void lib_main_model();
 extern void lib_main_terrain();
+extern void lib_main_gui();
 
 // 加载核心配置文件
 static bool load_core_config(CCoreConfig& config)
@@ -70,6 +71,7 @@ void App::Init(const char* workpath, const IVarList& args, int screen_width, int
 	lib_main_game();
   lib_main_model();
   lib_main_terrain();
+  lib_main_gui();
 
 	ICore* core = NULL;
 	IWorld* pWorld = NULL;

@@ -69,6 +69,14 @@ public:
   virtual bool Draw(const FmPlane* planes, size_t plane_num) = 0;
   virtual void SetWorldMatrix(const FmMat4& mat) = 0;
   virtual bool DrawShadowMap(const FmPlane* planes, size_t plane_num) = 0;
+
+  // 需要投射影子
+  virtual void SetCastShadow(bool value) = 0;
+  virtual bool GetCastShadow() const = 0;
+
+  // 需要接受投射影子
+  virtual void SetReceiveShadow(bool value) = 0;
+  virtual bool GetReceiveShadow() const  = 0;
 };
 
 #endif // _VISUAL_I_MODEL_PLAYER_H

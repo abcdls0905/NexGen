@@ -898,3 +898,72 @@ bool CreateTextureAlphaFromData(const char* file_name, const void* data, unsigne
 	return p;
 }
 
+extern bool SaveTexToFile(const char* name, fm_uint tex, int w, int h)
+{
+  Assert(name != NULL);
+
+  const char* dot = strrchr(name, '.');
+
+  if (NULL == dot)
+  {
+    return false;
+  }
+
+  FREE_IMAGE_FORMAT format;
+
+  if (stricmp(dot, ".bmp") == 0)
+  {
+    format = FIF_BMP;
+  }
+  else if (stricmp(dot, ".jpg") == 0)
+  {
+    format = FIF_JPEG;
+  }
+  else if (stricmp(dot, ".png") == 0)
+  {
+    format = FIF_PNG;
+  }
+  else if (stricmp(dot, ".dds") == 0)
+  {
+    format = FIF_DDS;
+  }
+  else
+  {
+    return false;
+  }
+
+  FIBITMAP * bitmap = ::FreeImage_Allocate(w, h, 32);
+
+  unsigned char* bits = FreeImage_GetBits(bitmap);
+
+  //glPixelStorei(GL_PACK_ALIGNMENT, 1);
+  glBindTexture(GL_TEXTURE_2D, tex);
+  ::glReadPixels(0, 0, w, h, GL_RGBA, GL_UNSIGNED_BYTE, (void*)bits);
+  bool result = TestErr("SaveScreenToFile")==0;
+  if(format == FIF_JPEG)
+  {
+    FIBITMAP *old_dib = bitmap;
+    bitmap = FreeImage_ConvertTo24Bits(bitmap);
+    FreeImage_Unload(old_dib);
+    bits = FreeImage_GetBits(bitmap);
+    trans_rgb(bits, w, h);
+  }
+  else
+  {	
+    trans_rgba(bits, w, h);
+  }
+
+  char buf[256];
+
+
+  if(!FreeImage_Save(format, bitmap, name))
+  {
+    sprintf(buf, "SaveScreenToFile error ==> can't save to %s", name);
+    CORE_TRACE(buf);
+  }
+
+  FreeImage_Unload(bitmap);
+  return result;
+  return true;
+}
+

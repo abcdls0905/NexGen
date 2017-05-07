@@ -7,6 +7,7 @@
 #include "../public/core_log.h"
 #include "../visual/i_render.h"
 #include "../visual/i_context.h"
+#include "../gui/gui.h"
 
 DECLARE_ENTITY(World, 0, IEntity);
 
@@ -17,6 +18,7 @@ World::World()
 	m_nWidth = 800;
 	m_nHeight = 600;
 	m_pRender = NULL;
+  m_pMainGui = NULL;
   m_pMainScene = NULL;
 }
 
@@ -33,6 +35,7 @@ bool World::Init(const IVarList& args)
 
 bool World::Shut()
 {
+  SAFE_RELEASE(m_pMainGui);
 	return true;
 }
 
@@ -47,7 +50,10 @@ void World::Execute(float seconds)
   {
     m_pMainScene->Update(seconds);
   }
-
+  if (m_pMainGui)
+  {
+    m_pMainGui->Update(seconds);
+  }
 }
 
 void World::Display(float offset_seconds)
@@ -60,10 +66,27 @@ void World::Display(float offset_seconds)
   {
     m_pMainScene->Realize();
   }
+
 #ifdef PERFORMANCE_DEBUG
   m_pRender->GetPerformance()->dRealizeTime += 
     performance_time() - dRealizeTime;
 #endif
+
+  // 最后渲染界面
+  if (m_pMainGui)
+  {
+#ifdef PERFORMANCE_DEBUG
+    double dGuiRealizeTime = performance_time();
+#endif
+
+    m_pMainGui->Realize();
+
+#ifdef PERFORMANCE_DEBUG
+    m_pRender->GetPerformance()->dGuiRealizeTime += 
+      performance_time() - dGuiRealizeTime;
+#endif
+  }
+
 	m_pRender->BeginFrame(m_nBackColor);
 	m_pRender->EndFrame();
 }
@@ -135,4 +158,21 @@ PERSISTID World::GetMainSceneID() const
     return PERSISTID();
   }
   return m_pMainScene->GetID();
+}
+
+void World::SetMainGuiID(const PERSISTID& id)
+{
+  if (id.IsNull())
+  {
+    m_pMainGui = NULL;
+    return;
+  }
+
+  IEntity* pEntity = GetCore()->GetEntity(id);
+
+  if (NULL == pEntity)
+  {
+    return;
+  }
+  m_pMainGui = (Gui*)pEntity;
 }

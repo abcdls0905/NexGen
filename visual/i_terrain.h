@@ -55,6 +55,9 @@ public:
   // 需要接受投射影子
   virtual void SetReceiveShadow(bool value) = 0;
   virtual bool GetReceiveShadow() const = 0;
+
+  virtual void InitFractalTerrain(int w) = 0;
+
   /*
 	// 获得加载百分比
 	virtual float GetLoadPercent() = 0;

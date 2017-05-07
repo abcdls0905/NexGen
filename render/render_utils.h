@@ -16,7 +16,8 @@
 // gl es ´íÎó¼ì²âº¯Êı
 inline bool TestErr(const char* ident)
 {
-	int err = glGetError();	
+  //int err = glGetError();	
+  int err = GL_NO_ERROR;	 //ls test
 	if(err == GL_NO_ERROR)
 		return false;
 	if(ident)

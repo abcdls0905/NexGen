@@ -35,4 +35,6 @@ extern bool CreateTextureFromData(const char* file_name,
 extern bool CreateTextureAlphaFromData(const char* file_name, const void* data, unsigned int data_size, _ALPHA_INFO* info);
 extern bool SaveScreenToFile(const char* file_name, int x, int y, int w, int h);
 
+extern bool SaveTexToFile(const char* file_name, fm_uint tex, int w, int h);
+
 #endif

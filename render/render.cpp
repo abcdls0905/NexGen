@@ -1026,6 +1026,14 @@ void Render::BeginFrame(unsigned int back_color)
     pView->DrawScene();
 		pView->ClearBatchs();
 	}
+
+  if (false)
+  {
+    ITexture* texture = CreateTexture("tex\\default_base_n.pvr", false);
+    SaveTextureToFile(texture->GetShaderTex(), "test.png");
+    int x = 0;
+  }
+
 	m_SceneViews.clear();
 
 	// 恢复原先恢复的FBO 无论如何解决UI都可以正确绘制上去 而且UI直接绘制到backbuffer上面

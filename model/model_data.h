@@ -277,11 +277,13 @@ struct custom_material_t
   material_info_t MatInfo;			// 材质数据
 };
 
+struct model_node_t;
 
 // 节点材质
 struct node_material_t
 {
   ModelVF vf;
+  model_node_t* pNode;
   char* pszName;
 	unsigned int nVertexCount;
 	vertex_data_t SingleVB;				//顶点信息

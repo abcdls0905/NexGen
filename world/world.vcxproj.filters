@@ -11,6 +11,7 @@
     <ClInclude Include="render_tex.h" />
     <ClInclude Include="pssm.h" />
     <ClInclude Include="sky_box.h" />
+    <ClInclude Include="model.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="world.cpp" />
@@ -21,5 +22,6 @@
     <ClCompile Include="render_tex.cpp" />
     <ClCompile Include="pssm.cpp" />
     <ClCompile Include="sky_box.cpp" />
+    <ClCompile Include="model.cpp" />
   </ItemGroup>
 </Project>

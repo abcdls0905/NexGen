@@ -13,6 +13,7 @@
 
 class IRender;
 class Scene;
+class Gui;
 
 class World : public IWorld
 {
@@ -22,6 +23,7 @@ private:
 	IRender* m_pRender;
   unsigned int m_nBackColor;
   Scene* m_pMainScene;
+  Gui* m_pMainGui;
 public:
 	World();
 	virtual ~World();
@@ -48,6 +50,8 @@ public:
   void SetMainSceneID(const PERSISTID& id);
   PERSISTID GetMainSceneID() const;
   IScene* GetMainScene() const { return m_pMainScene; }
+  // 主界面对象
+  void SetMainGuiID(const PERSISTID& id);
 };
 
 #endif

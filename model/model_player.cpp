@@ -328,7 +328,7 @@ void CModelPlayer::DrawMaterialSolid(const MatInfo* info, bool onlyzpass /*= fal
 
 
   // 是否开启静态光照下的人物点光源照明
-  bool dynamic_shadow = false;
+  bool dynamic_shadow = (pContext->GetEnableDynamicShadow() && GetReceiveShadow());
   bool point_light = (!dynamic_shadow)
     && (pContext->GetInt(IRenderContext::I_ENABLE_ROLE_LIGHT) != 0)
     && (pNode->nType == FXNODE_TYPE_SKIN);
@@ -469,8 +469,23 @@ void CModelPlayer::SetShaderConstValue(IShaderProgram* pShader, const MatInfo* i
     FmVec4 light_diffuse = pContext->GetVector4(IRenderContext::V_LIGHT_DIFFUSE);
     light_ambient.w = pContext->GetFloat(IRenderContext::F_REFLECT_FACTOR);
     ShaderManager::Inst().SetShaderValue4f(c_LightAmbient, light_ambient);
-    light_diffuse = FmVec4(2.0f, 2.0f, 2.0f, 1.0f);
+    //light_diffuse = FmVec4(2.0f, 2.0f, 2.0f, 1.0f);
     ShaderManager::Inst().SetShaderValue4f(c_LightDiffuse, light_diffuse);
+  }
+
+  if (pContext->GetEnableDynamicShadow())
+  {
+    FmMat4 viewRelative;
+
+    FmMat4Inverse(&viewRelative, NULL, pContext->GetShadowMapViewMatrix(0));
+    viewRelative._41 -= refer_pos.x;
+    viewRelative._42 -= refer_pos.y;
+    viewRelative._43 -= refer_pos.z;
+
+    FmMat4Inverse(&viewRelative, NULL, &viewRelative);
+
+    FmMat4MultiplyTranspose(&mtxWVP, &viewRelative, pContext->GetShadowMapProjMatrix(0));
+    ShaderManager::Inst().SetShaderValueMat4(c_mtxShadowViewProj, mtxWVP);
   }
 
   bool blend_quality = pMatInfo->bBlendQuality;
@@ -539,7 +554,7 @@ void CModelPlayer::SetShaderConstValue(IShaderProgram* pShader, const MatInfo* i
 
   FmVec4 height_fog_color = pContext->GetVector4(IRenderContext::V_HEIGHTFOG_CURRENT);
 
-  light_dir = FmVec4(0.76, 0.64, 0.12, 0.0);
+  //light_dir = FmVec4(0.76, 0.64, 0.12, 0.0);
   ShaderManager::Inst().SetShaderValue3f(c_vLightDir, light_dir.x, light_dir.y, light_dir.z);
   ShaderManager::Inst().SetShaderValueMat4(c_mtxViewInverse, mtxViewInverse);
 
@@ -579,6 +594,18 @@ void CModelPlayer::SetModelTexture(const MatInfo* info, IShaderProgram* pShader,
       }
     }
   }
+  // 阴影图
+  IRenderContext* pContext = g_pRender->GetContext();
+  // 实时阴影
+  bool dynamic_shadow = (pContext->GetEnableDynamicShadow() && GetReceiveShadow());
+  if (dynamic_shadow)
+  {
+    IColorRT* colorRT = pContext->GetDynamicShadowRT();
+    ITextureSampler* pTexSampler = pContext->GetDynamicShadowRT()->GetTextureSampler();
+    pTexSampler->SetTextureUVWrapMode(ITextureSampler::TWM_CLAMP_TO_EDGE, ITextureSampler::TWM_CLAMP_TO_EDGE);
+
+    SetTexture(tex_Shadow, pContext->GetDynamicShadowRT()->GetTexture());
+  }
 }
 
 void CModelPlayer::SetWorldMatrix(const FmMat4& mat)
@@ -590,6 +617,143 @@ bool CModelPlayer::DrawShadowMap(const FmPlane* planes, size_t plane_num)
 {
   if (!IsReady())
     return false;
-
+  model_t* pModel = m_pResModel->GetModelData();
+  if (pModel)
+  {
+    m_mtxCurrentTM = m_mtxWorldTM;
+    bool bCull = false;
+    for (unsigned int i = 0; i < pModel->nRootNodeCount; ++i)
+    {
+      DrawNodeShadowMap(&pModel->RootNodes[i], bCull);
+    }
+  }
   return true;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+}
+
+void CModelPlayer::DrawNodeShadowMap(model_node_t* pNode, bool bCull)
+{
+  Assert(pNode != NULL);
+  FmMat4 mtxOldWorld = m_mtxCurrentTM;
+
+  unsigned int m,k;
+  material_info_t* pMatInfo;
+  node_material_t* pMat;
+
+  m_mtxCurrentTM = m_mtxCurrentTM;
+  for (m = 0; m < pNode->nMaterialCount; m++)
+  {
+    pMat = &pNode->Materials[m];
+    m_pCurMatInfo = &pMat->MatInfo;
+    pMatInfo = m_pCurMatInfo;
+
+    AddDrawMaterialShadowMapBatch(pMat, pMatInfo, pNode);
+  }
+  m_mtxCurrentTM = mtxOldWorld;
+}
+
+void CModelPlayer::AddDrawMaterialShadowMapBatch(node_material_t* pMat, material_info_t* pMatInfo, model_node_t* pNode)
+{
+  Assert(pMat != NULL);
+  Assert(pMatInfo != NULL);
+  Assert(pNode != NULL);
+
+  // 必要时创建顶点定义
+  if (!CreateVBIB(pMat, pNode))
+  {
+    //error
+    return;
+  }
+  pMat->vf.Parse(pMat->nMaterialInfo, pMat->nMaterialInfoEx, pNode->nModelInfo, pNode->nType);
+
+  MatInfo& _matinfo = *m_MatInfoPools.Alloc();
+  _matinfo.pMat = pMat;
+  _matinfo.pNode = pNode;
+  _matinfo.pThis = this;
+
+  IRenderContext* pContext = g_pRender->GetContext();
+  _matinfo.camera = pContext->GetCamera();
+  _matinfo.refer_pos = pContext->GetReferPosition();
+  _matinfo.pMatInfo = m_pCurMatInfo;
+
+  _matinfo.bone_matrices = NULL;
+  _matinfo.mtxCurrentTM = m_mtxCurrentTM;
+
+  g_pRender->GetSceneView()->AddSolidBatch(DrawMaterialShadowMapBatch, &_matinfo);
+}
+
+void CModelPlayer::DrawMaterialShadowMapBatch(void* pdata)
+{
+  MatInfo* param = (MatInfo*)pdata;
+  param->pThis->DrawMaterialShadowMap(param);
+}
+
+void CModelPlayer::DrawMaterialShadowMap(const MatInfo* info)
+{
+  	const MatInfo* pRenderInfo = info;
+	CModelPlayer* pthis = pRenderInfo->pThis;
+	IRender* pRender = g_pRender;
+	IRenderContext* pContext = g_pRender->GetContext();
+	node_material_t* pMat = pRenderInfo->pMat;
+	material_info_t* pMatInfo = pRenderInfo->pMatInfo;
+	model_node_t* pNode = pMat->pNode;
+
+	IShaderProgram* pShader = SelectShadowMapShader(info, pMat, pNode); 
+
+	if (pShader == NULL)
+	{
+		return;
+	}
+	pShader->UsedShader();
+
+	IRenderDrawOp* pRenderDrawOp = g_pRender->GetRenderDrawOp();
+
+	pRenderDrawOp->SetVB( pMat->pSingleGPUVB->GetBuffer());
+	pRenderDrawOp->SetIB( pMat->pGPUIB->GetBuffer());
+
+	if (!CreateVDecl(pMat, pNode, false))
+	{
+		pRenderDrawOp->SetVB(0);
+		pRenderDrawOp->SetIB(0);
+		return;
+	}
+
+	// 设置镂空贴图
+	if (pMatInfo->bAlphaTest)
+	{
+		ITexture* pTexDiffuse = pMatInfo->DiffuseMap.pTex;
+
+		if (pTexDiffuse)
+		{
+			SetTexture(tex_Diffuse, pTexDiffuse->GetCanUseShaderTex()->GetTexture());
+		}
+		else
+		{
+			SetTexture(tex_Diffuse, NULL);
+		}
+
+		float alpha_ref = get_current_alpha_ref(pMatInfo->fAlphaRef) / 255.0F;
+		ShaderManager::Inst().SetShaderValue1f(c_fAlphaRefValue, alpha_ref * 0.5f);
+	}
+
+	const camera_t& camera = pRenderInfo->camera;
+	const FmVec3& refer_pos = pRenderInfo->refer_pos;
+	FmMat4 mtxWorld = pRenderInfo->mtxCurrentTM;
+	mtxWorld._41 -= (float)refer_pos.x;
+	mtxWorld._42 -= (float)refer_pos.y;
+	mtxWorld._43 -= (float)refer_pos.z;
+
+	FmMat4 mtxWVP;
+	FmMat4Multiply(&mtxWVP, &mtxWorld, &camera.mtxViewProjRelative);
+	ShaderManager::Inst().SetShaderValueMat4(c_mtxWVP, mtxWVP);
+
+// 	if(pRenderInfo->bone_matrices)
+// 		ShaderManager::Inst().SetShaderValue4fv(c_BoneList, 1 * 3, (float*)pRenderInfo->bone_matrices);
+
+	IRenderStateOp* pRenderStateOp = pShader->GetRenderStateOp();
+
+  int ib_count = pMat->nIndicesCount;
+	pRenderDrawOp->DrawIndex(IRenderDrawOp::DRAW_TRIANGLES, ib_count,IRenderDrawOp::VERTEX_INDEX_UNSIGNED_SHORT, &((fm_short*)0)[0]);
+
+	pRenderDrawOp->SetIB( 0 );
+	pRenderDrawOp->SetVB( 0 );
 }

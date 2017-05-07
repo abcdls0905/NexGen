@@ -1273,7 +1273,8 @@ void CSceneView::EndTopmostBatch()
 void CSceneView::TestErr(const char* ident)
 {
 #ifdef _DEBUG
-	int err = glGetError();	
+  //int err = glGetError();	
+  int err = GL_NO_ERROR;	
 	if(err == GL_NO_ERROR)
 		return;
 	CORE_TRACE("Batch Err!");

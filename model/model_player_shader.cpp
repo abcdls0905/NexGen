@@ -560,3 +560,53 @@ IShaderProgram* CModelPlayer::SelectShader(const MatInfo* info,
 
 	return ShaderManager::Inst().GetShader(vs_flags,ps_flags,pVS, pPS, pMat, pNode, const_value_name, c_max);
 }
+
+
+IShaderProgram* CModelPlayer::SelectShadowMapShader(const MatInfo* info, node_material_t* pMat, model_node_t* pNode)
+{
+  material_info_t* pMatInfo = info->pMatInfo;
+  bool alpha_test = pMatInfo->bAlphaTest;
+
+  size_t vs_flags = size_t(alpha_test) << SHADOWMAP_VS_ALPHATEST;
+  size_t ps_flags = size_t(alpha_test) << SHADOWMAP_PS_ALPHATEST;
+
+  IVertexShader* pVS = NULL;
+  IPixelShader* pPS = s_ShadowMapPSList.GetShader(ps_flags);
+
+  if (pNode->nType != FXNODE_TYPE_MESH)
+  {
+    vs_flags |= (0x1 << VERTEX_SKELETON_SHIFT);
+
+    if (vs_flags != 0)
+    {
+      vs_flags |= (0x1 << VERTEX_TEXTURE0_SHIFT);
+
+      pVS = s_ShadowMapVSList.GetShader(vs_flags);
+    }
+    else
+    {
+      pVS = s_ShadowMapVSList.GetShader(vs_flags);
+    }
+  }
+  else
+  {
+    if (vs_flags != 0)
+    {
+      vs_flags |= (0x1 << VERTEX_TEXTURE0_SHIFT);
+
+      pVS = s_ShadowMapVSList.GetShader(vs_flags);
+    }
+    else
+    {
+      pVS = s_ShadowMapVSList.GetShader(vs_flags);
+    }
+  }
+
+  const char* ptr[ModelVF::MAX];
+  int len;
+  pMat->vf.GetNames(ptr, len);
+  ShaderKey key;
+  key.ps = 0;
+  key.vs = 0;
+  return ShaderManager::Inst().GetShader(vs_flags, ps_flags, pVS, pPS, ptr, len, key, const_value_name, c_max);
+}

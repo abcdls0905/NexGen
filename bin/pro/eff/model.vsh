@@ -6,10 +6,16 @@ attribute mediump vec3 iNormal;
 uniform highp mat4 c_mtxWVP;
 uniform mediump vec4 c_vViewPos;
 uniform highp mat4 c_mtxWorld;
+uniform mediump mat4  c_mtxShadowViewProj;
 
 varying mediump vec2 texUV;
 varying mediump vec3 oNormal;
 varying mediump vec4 oViewToVertex;
+
+#ifdef SHADOWMAP
+varying mediump vec4 oTexCoordShadow;
+#endif
+
 
 void main(void)
 {
@@ -21,4 +27,8 @@ void main(void)
     mediump vec4 pos_in_world = c_mtxWorld * _pos;
     vec3 view_vec = pos_in_world.xyz - c_vViewPos.xyz;
     oViewToVertex = vec4(view_vec, length(view_vec));
+    #ifdef SHADOWMAP
+	    oTexCoordShadow = pos_in_world * c_mtxShadowViewProj;
+    #endif	
+	
 }

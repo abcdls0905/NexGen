@@ -26,6 +26,7 @@ public:
   virtual void SetMainSceneID(const PERSISTID& id) = 0;
   virtual PERSISTID GetMainSceneID() const = 0;
   virtual IScene* GetMainScene() const = 0;
+  virtual void SetMainGuiID(const PERSISTID& id) = 0;
 };
 
 #endif

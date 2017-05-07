@@ -211,6 +211,7 @@ model_t* load_md2_model(const char* pszModelName, char* tex)
     {
       node_material_t* material = &root->Materials[j];
       material->nMaterialInfo = MATERIAL_DIFFUSE_MAP_INFO;
+      material->pNode = root;
       init_material_value(&material->MatInfo);
       {
         //ÉèÖÃÌùÍ¼Êý¾Ý

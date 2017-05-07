@@ -8,6 +8,30 @@ class IModelPlayer;
 class IModel : public IVisBase
 {
 public:
+
+  virtual bool Init(const IVarList& args) = 0;
+  virtual bool Shut() = 0;
+  virtual void Load(const char* modelfile, const char* type) = 0;
+  virtual void Realize() = 0;
+  virtual void RealizeNormal() = 0;
+  virtual void RealizeReflect() = 0;
+  virtual PERSISTID GetLinkObject(const char* name) = 0;
+  // 位置
+  virtual bool SetPosition(float x, float y, float z) = 0;
+  virtual FmVec3 GetPosition() const = 0;
+  // 方向
+  virtual bool SetAngle(float x, float y, float z) = 0;
+  virtual FmVec3 GetAngle() const = 0;
+  virtual void RealizeShadowMap() = 0;
+  // 需要投射影子
+  virtual void SetCastShadow(bool value) = 0;
+  virtual bool GetCastShadow() const = 0;
+
+  // 需要接受投射影子
+  virtual void SetReceiveShadow(bool value) = 0;
+  virtual bool GetReceiveShadow() const = 0;
+
+  /*
 	virtual bool Load() = 0;
 	
 	virtual void Update(float seconds) = 0;
@@ -300,6 +324,7 @@ public:
 
 	// 获得内存占用
 	virtual size_t GetMemoryUsage() = 0;
+  */
 
 };
 #endif

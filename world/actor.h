@@ -22,9 +22,11 @@ private:
   IRender* m_pRender;
   core_string m_ConfigFile;
   IModelSystem* m_pModelSystem;
-  IModelPlayer* m_pModelPlayer;
+  bool m_bCastShadow;
+  bool m_bReceiveShadow;
   bool m_bVisible;
 public:
+  IModelPlayer* m_pModelPlayer;
   Actor();
   virtual ~Actor();
 public:
@@ -43,6 +45,13 @@ public:
   virtual FmVec3 GetAngle() const;
   virtual void RealizeShadowMap();
   void UpdateMatrix(IVisBase* pVisBase);
+  // 需要投射影子
+  virtual void SetCastShadow(bool value) { m_bCastShadow = value; }
+  virtual bool GetCastShadow() const { return m_bCastShadow; }
+
+  // 需要接受投射影子
+  virtual void SetReceiveShadow(bool value) { m_bReceiveShadow = value; }
+  virtual bool GetReceiveShadow() const { return m_bReceiveShadow; }
 };
 
 #endif
