@@ -1,3 +1,6 @@
+
+//分形算法，用于地形生成，动态云层等，暂时只做地形
+
 #ifndef _FRACTAL_H_
 #define _FRACTAL_H_
 
