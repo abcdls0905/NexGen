@@ -56,6 +56,7 @@ inline float* get_vertex_by_index(const vertex_data_t* pData,
 class IRenderContext;
 class IActionPlayer;
 struct skt_pose_t;
+struct model_t;
 
 class IModelPlayer: public IResBase
 {
@@ -77,6 +78,7 @@ public:
   // 需要接受投射影子
   virtual void SetReceiveShadow(bool value) = 0;
   virtual bool GetReceiveShadow() const  = 0;
+  virtual void SetModelData(model_t* data) = 0;
 };
 
 #endif // _VISUAL_I_MODEL_PLAYER_H

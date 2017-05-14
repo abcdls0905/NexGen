@@ -60,6 +60,8 @@ public:
 
 	// 获得模型
 	model_t* GetModelData() const { return m_pModel; }
+
+  void SetModeData(model_t* data) {m_pModel = data;}
 	
 	// 设置名称
 	void SetName(const char* value)

@@ -408,4 +408,6 @@ model_t* load_model(const char* pszModelName, char* tex = 0);
 // Ð¶ÔØÄ£ÐÍÊµÀý
 void unload_model(model_t* pModel);
 
+model_t* gen_fractal_terrain(int size);
+
 #endif

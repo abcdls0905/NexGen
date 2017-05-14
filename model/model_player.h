@@ -442,7 +442,9 @@ private:
   MatInfo* m_MatList;
   IRender* m_pRender;
   IRenderContext* m_pContext;
+public:
   CResModel* m_pResModel;
+private:
   core_string m_strName;
   double m_dBeginTime;
   double m_dCurrentTime;
@@ -573,6 +575,7 @@ public:
   // ª≠≤ƒ÷ “ı”∞Õº
   void DrawMaterialShadowMap(const MatInfo* info);
   IShaderProgram* SelectShadowMapShader(const MatInfo* info, node_material_t* pMat, model_node_t* pNode);
+  virtual void SetModelData(model_t* data);
 };
 
 #endif

@@ -58,7 +58,7 @@ public:
   virtual void SetReceiveShadow(bool value)  {m_bReceiveShadow = value; }
   virtual bool GetReceiveShadow() const { return m_bReceiveShadow; }
   virtual void InitFractalTerrain(int w);
-  virtual void GenerateFractalTerrain();
+  virtual void SetTerrainMode(IModel* mode);
 };
 
 #endif

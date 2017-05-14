@@ -5,7 +5,7 @@
 #include "i_vis_base.h"
 
 // 地形对象基类
-
+class IModel;
 class ITerrain: public IVisBase
 {
 public:
@@ -57,6 +57,8 @@ public:
   virtual bool GetReceiveShadow() const = 0;
 
   virtual void InitFractalTerrain(int w) = 0;
+
+  virtual void SetTerrainMode(IModel* mode) = 0;
 
   /*
 	// 获得加载百分比

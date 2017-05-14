@@ -229,7 +229,6 @@ void CModelPlayer::DrawNode(model_node_t* pNode, bool bCull, MatInfo* matinfo)
 {
   Assert(pNode != NULL);
   FmMat4 mtxOldWorld = m_mtxCurrentTM;
-  int id;
   for (unsigned int m = 0; m < pNode->nMaterialCount; m++)
   {
     node_material_t* pMat = &pNode->Materials[m];
@@ -635,7 +634,7 @@ void CModelPlayer::DrawNodeShadowMap(model_node_t* pNode, bool bCull)
   Assert(pNode != NULL);
   FmMat4 mtxOldWorld = m_mtxCurrentTM;
 
-  unsigned int m,k;
+  unsigned int m;
   material_info_t* pMatInfo;
   node_material_t* pMat;
 
@@ -756,4 +755,11 @@ void CModelPlayer::DrawMaterialShadowMap(const MatInfo* info)
 
 	pRenderDrawOp->SetIB( 0 );
 	pRenderDrawOp->SetVB( 0 );
+}
+
+void CModelPlayer::SetModelData(model_t* data)
+{
+  if (!m_pResModel)
+    return;
+  m_pResModel->SetModeData(data);
 }

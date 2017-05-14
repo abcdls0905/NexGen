@@ -157,9 +157,9 @@ void Fractal::SetCornerValue(float center, float lefttop, float leftbuttom, floa
 
   for (int i = 0; i < size*size; i++)
   {
-    printf("%f ", data[i]);
-    if (i%(size-1) == 0 && i > 0)
-      printf("\n");
+//     printf("%f ", data[i]);
+//     if (i%(size-1) == 0 && i > 0)
+//       printf("\n");
   }
 
 }

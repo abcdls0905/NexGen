@@ -11,6 +11,8 @@
 
 #include "../render/render_header.h"
 
+#include "../algorithm/fractal.h"
+
 extern IRender* g_pRender;
 
 // 初始化材质数据
@@ -326,4 +328,168 @@ model_t* load_model(const char* pszModelName, char* tex)
 
 void unload_model(model_t* pModel)
 {
+}
+
+
+model_t* gen_fractal_terrain(int size)
+{
+  Fractal fractal;
+  fractal.SetSize(size);
+  fractal.SetCornerValue(0, 0, 0, 0, 0);
+  float* vertexData = fractal.GetData();
+  model_t* ret = (model_t*)CORE_ALLOC(sizeof(model_t));
+  memset(ret, 0, sizeof(model_t));
+
+  ret->pszTexBase = "E:\\SVNPro\\NexGen\\bin\\res\\md2\\拿刀的古代士兵\\";
+
+  ret->nRootNodeCount = 1;
+  ret->RootNodes = (model_node_t*)CORE_ALLOC(
+    sizeof(model_node_t) * ret->nRootNodeCount);
+  memset(ret->RootNodes, 0, sizeof(model_node_t) * ret->nRootNodeCount);
+
+  for (int i = 0; i < ret->nRootNodeCount; ++i)
+  {
+    model_node_t* root = &ret->RootNodes[i];
+    root->nModelInfo= MODEL_POSITION_INFO + MODEL_NORMAL_INFO;
+    root->nMaterialCount = 1;
+    root->nChildNodeCount = 0;
+    root->Materials = new node_material_t[root->nMaterialCount];
+    memset(root->Materials, 0, sizeof(node_material_t) * root->nMaterialCount);
+    for (int j = 0; j < root->nMaterialCount; ++j)
+    {
+      node_material_t* material = &root->Materials[j];
+      material->nMaterialInfo = MATERIAL_DIFFUSE_MAP_INFO;
+      material->pNode = root;
+      init_material_value(&material->MatInfo);
+      {
+        //设置贴图数据
+        char* texFile = "evil.jpg";
+        material->MatInfo.DiffuseMap.pFileName = texFile;
+        material->MatInfo.DiffuseMap.nFileNameLen = strlen(texFile);
+      }
+
+      int temp = size - 1;
+
+      int trianglesCount = temp * temp * 2;
+      material->nSingleVertexSize = 8*sizeof(float);
+      material->SingleVB.nStride = material->nSingleVertexSize;
+      material->SingleVB.nCount = trianglesCount*3;
+      material->nVertexCount = trianglesCount*3;
+      create_vertex_data(&material->SingleVB, material->SingleVB.nStride, material->nVertexCount);
+
+      float stride = 10.0f;
+      int count = 0;
+      for (int k1 = 0; k1 < temp; k1++)
+      {
+        for (int k2 = 0; k2 < temp; k2++)
+        {
+          int index1 = temp*k1+k2;
+          int index2 = temp*(k1+1)+k2;
+          int index3 = temp*(k1+1)+k2+1;
+          int index4 = temp*k1+k2+1;
+
+          //vertex1
+          int value = 60;
+          float v1x = stride * k1;
+          float v1y = vertexData[index1]*value;
+          float v1z = stride * k2;
+          float v2x = stride * (k1+1);
+          float v2y = vertexData[index2]*value;
+          float v2z = stride * k2;
+          float v3x = stride * (k1+1);
+          float v3y = vertexData[index3]*value;
+          float v3z = stride * (k2+1);
+
+          float p1[3] = {v1x, v1y, v1z};
+          float p2[3] = {v2x, v2y, v2z};
+          float p3[3] = {v3x, v3y, v3z};
+          FmVec3 normal = CalculateNormal(p1, p2, p3);
+
+          float u = rand()%100/100.0f;
+          float v = rand()%100/100.0f;
+
+          material->SingleVB.pVertices[count++] = v1x;
+          material->SingleVB.pVertices[count++] = v1y;
+          material->SingleVB.pVertices[count++] = v1z;
+          material->SingleVB.pVertices[count++] = normal.x;
+          material->SingleVB.pVertices[count++] = normal.y;
+          material->SingleVB.pVertices[count++] = normal.z;
+          material->SingleVB.pVertices[count++] = 0;
+          material->SingleVB.pVertices[count++] = 0;
+
+          material->SingleVB.pVertices[count++] = v2x;
+          material->SingleVB.pVertices[count++] = v2y;
+          material->SingleVB.pVertices[count++] = v2z;
+          material->SingleVB.pVertices[count++] = normal.x;
+          material->SingleVB.pVertices[count++] = normal.y;
+          material->SingleVB.pVertices[count++] = normal.z;
+          material->SingleVB.pVertices[count++] = u;
+          material->SingleVB.pVertices[count++] = v;
+
+          material->SingleVB.pVertices[count++] = v3x;
+          material->SingleVB.pVertices[count++] = v3y;
+          material->SingleVB.pVertices[count++] = v3z;
+          material->SingleVB.pVertices[count++] = normal.x;
+          material->SingleVB.pVertices[count++] = normal.y;
+          material->SingleVB.pVertices[count++] = normal.z;
+          material->SingleVB.pVertices[count++] = u;
+          material->SingleVB.pVertices[count++] = v;
+
+          //vertex2
+
+          v1x = stride * k1;
+          v1y = vertexData[index1]*value;
+          v1z = stride * k2;
+          v2x = stride * (k1+1);
+          v2y = vertexData[index3]*value;
+          v2z = stride * (k2+1);
+          v3x = stride * (k1);
+          v3y = vertexData[index4]*value;
+          v3z = stride * (k2+1);
+
+          float p21[3] = {v1x, v1y, v1z};
+          float p22[3] = {v2x, v2y, v2z};
+          float p23[3] = {v3x, v3y, v3z};
+          normal = CalculateNormal(p21, p22, p23);
+
+          material->SingleVB.pVertices[count++] = v1x;
+          material->SingleVB.pVertices[count++] = v1y;
+          material->SingleVB.pVertices[count++] = v1z;
+          material->SingleVB.pVertices[count++] = normal.x;
+          material->SingleVB.pVertices[count++] = normal.y;
+          material->SingleVB.pVertices[count++] = normal.z;
+          material->SingleVB.pVertices[count++] = u;
+          material->SingleVB.pVertices[count++] = v;
+
+          material->SingleVB.pVertices[count++] = v2x;
+          material->SingleVB.pVertices[count++] = v2y;
+          material->SingleVB.pVertices[count++] = v2z;
+          material->SingleVB.pVertices[count++] = normal.x;
+          material->SingleVB.pVertices[count++] = normal.y;
+          material->SingleVB.pVertices[count++] = normal.z;
+          material->SingleVB.pVertices[count++] = u;
+          material->SingleVB.pVertices[count++] = v;
+
+          material->SingleVB.pVertices[count++] = v3x;
+          material->SingleVB.pVertices[count++] = v3y;
+          material->SingleVB.pVertices[count++] = v3z;
+          material->SingleVB.pVertices[count++] = normal.x;
+          material->SingleVB.pVertices[count++] = normal.y;
+          material->SingleVB.pVertices[count++] = normal.z;
+          material->SingleVB.pVertices[count++] = u;
+          material->SingleVB.pVertices[count++] = v;
+
+        }
+      }
+
+      material->nIndicesCount = trianglesCount * 3;
+      material->indices = new unsigned short[trianglesCount * 3];
+      for (int k = 0; k < trianglesCount * 3; ++k)
+      {
+        material->indices[k] = k;
+      }
+
+    }
+  }
+  return ret;
 }

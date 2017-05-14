@@ -138,7 +138,7 @@ bool GameControl::MsgKeyDown(size_t param1, size_t param2)
     {
       if (actor1)
         break;
-      IModel* iActor = (IModel*)g_pCore->CreateEntity("Actor");
+      IModel* iActor = (IModel*)g_pCore->CreateEntity("Model");
       actor1 = (Model*) iActor;
       actor1->SetContext(g_terrain->GetContext());
       actor1->Load("md2\\ÄÃµ¶µÄ¹Å´úÊ¿±ø\\tris.md2", "");
@@ -164,7 +164,9 @@ bool GameControl::MsgKeyDown(size_t param1, size_t param2)
     }
   case 'V':
     {
-      g_terrain->InitFractalTerrain(5);
+      if (!actor)
+        break;
+      actor->GenFractral(17);
       break;
     }
   case 'L':

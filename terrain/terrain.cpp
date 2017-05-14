@@ -136,4 +136,10 @@ void Terrain::InitFractalTerrain(int w)
     return;
   m_pFractal->SetSize(w);
   m_pFractal->SetCornerValue(1.0, 0.0, 0.5, 0.0, 1.0);
+
+}
+
+void Terrain::SetTerrainMode(IModel* mode)
+{
+  m_pFractalTerrain = mode;
 }
