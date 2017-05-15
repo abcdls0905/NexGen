@@ -45,9 +45,7 @@ void main ()
     #endif
     diffuse_color.xyz += specular_color.xyz;
     
-    gl_FragColor = crTexDiffuse * diffuse_color;
-
-    #ifdef SHADOWMAP
-        //gl_FragColor = vec4(shadow_Inten.xyz, 1.0);
-    #endif
+    //gl_FragColor = crTexDiffuse;
+    mediump vec4 lumine = vec4(0.6, 0.6, 0.6, 1.0);
+    gl_FragColor = crTexDiffuse*(lumine + diffuse_color);
 }
